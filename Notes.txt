@@ -1,0 +1,9 @@
+ our project contains four user types
+ 1. System admin
+ 2.Bus admin
+ 3. customer
+ 4. booker
+ ** First install django...
+  Then Pull  this project project to the folder where you installed django. 
+ ** Create your own branch and give it the same name as the name of application you are working on 
+ ** Don't forget to push and pull everyday.
