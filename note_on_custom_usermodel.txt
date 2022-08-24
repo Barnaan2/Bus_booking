@@ -1,0 +1,25 @@
+pip install django-phonenumber-field
+use the above command to install phone number field
+
+check if it is added into installed apps
+INSTALLED_APPS = [
+    ...
+    'phonenumber_field',
+    ...
+]
+
+
+then import into models you want like this:
+from phonenumber_field.modelfields import PhoneNumberField
+
+class MyModel(models.Model):
+    name = models.CharField(max_length=255)
+    phone_number = PhoneNumberField()
+   
+
+
+Then runserver and see if other error eists
+then migrate 
+
+
+
