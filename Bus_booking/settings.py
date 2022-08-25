@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'bus_admin.apps.BusAdminConfig',
     'system_admin.apps.SystemAdminConfig',
+    'Account',
+    'phonenumber_field'
 
 ]
 
@@ -74,6 +76,8 @@ TEMPLATES = [
     },
 ]
 
+
+AUTH_USER_MODEL= 'Account.User'
 WSGI_APPLICATION = 'Bus_booking.wsgi.application'
 
 
