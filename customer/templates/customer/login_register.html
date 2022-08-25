@@ -1,4 +1,4 @@
-{% extends 'customermain.html'%} {% block content%} {% if page == 'login' %}
+{% extends 'customer/customermain.html'%} {% block content%} {% if page == 'login' %}
 <div>
     <form method="POST" action="">
         {% csrf_token %}
