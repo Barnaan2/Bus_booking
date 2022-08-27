@@ -1,0 +1,33 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+
+
+
+<div>
+    <table>
+        <tr>
+            <th>Traveling Customer</th>
+            <th>Route</th>
+            <th>Travel start</th>
+            <th>Travel Destination</th>
+            <th>Travel Date</th>
+            <th>Travel Begin Time</th>
+            <th>Booked Seat</th>
+            <th>Number of reserved seat</th>
+        </tr>
+        {% for booking in bookings%}
+        <tr>
+            <td>{{booking.user.username}}</td>
+            <td>{{booking.route.name}}</td>
+            <td>{{booking.start}}</td>
+            <td>{{booking.destination}}</td>
+            <td>{{booking.travel_date}}</td>
+            <td>{{booking.travel_begin_time}}</td>
+            <td>{{booking.seat}}</td>
+            <td>Please anyone who knows counting ...</td>
+
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+
+{%endblock content%}
