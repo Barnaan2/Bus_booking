@@ -37,6 +37,7 @@ def route(request, pk):
 def booking(request, pk):
     
     subroute=SubRoute.objects.get(id=pk)
+    seats=Seat.objects.all()
     if request.method=='POST':
     
         book=Booking.objects.create(
@@ -54,7 +55,7 @@ def booking(request, pk):
         )
         return redirect ('my-booking', pk=request.user.id)
     
-    context={}
+    context={'seats':seats}
     return render(request, 'customer/booking.html', context)
     
     
