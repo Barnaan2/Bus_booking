@@ -1,0 +1,38 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+
+<div>
+    <table>
+        <tr>
+            <th>Traveling Bus</th>
+            <th>Bus Number</th>
+            <th>Travel start</th>
+            <th>Travel Destination</th>
+            <th>Via Cities</th>
+            <th>Travel Distance</th>
+            <th>Teavel Approximate Time</th>
+            <th>Single seat price</th>
+            <th>Travel Date</th>
+            <th>Travel Begin Time</th>
+            <th>Travel Facility</th>
+        </tr>
+        {% for subroute in subroutes %}
+        <tr>
+            <td>{{subroute.bus.bus.name}}</td>
+            <td>{{subroute.bus.bus_number}}</td>
+            <td>{{route.start}}</td>
+            <td>{{route.destination}}</td>
+            <td>{{route.via_cities}}</td>
+            <td>{{route.travel_distance}} km</td>
+            <td>{{route.travel_aproximate_time}}</td>
+            <td>{{route.single_seat_price}}</td>
+            <td>{{route.travel_date}}</td>
+            <td>{{route.travel_begin_time}}</td>
+            <td>{{route.travel_facilities}}</td>
+            <td><a href="{% url 'booking' subroute.id %}">Book</a></td>
+        </tr>
+        {%endfor%}
+    </table>
+</div>
+
+
+{%endblock content%}

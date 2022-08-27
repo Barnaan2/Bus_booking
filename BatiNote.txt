@@ -1,0 +1,8 @@
+========Customer booking upto seat booking=========
+1. First add users
+2. Add Buses
+3. Add Seat (add seat_no: 1, 2, 3, .... as much as you want, we will do on how to display seat based on particular bus number of seat)
+4. Add Single Bus
+5. Add Routes
+6. Add Subroute
+7. A customer can Book now
