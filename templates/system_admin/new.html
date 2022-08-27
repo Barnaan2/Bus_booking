@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>this is landing page for the afroperia Bus booking admin site</title>
+    <title>Document</title>
 </head>
 <body>
-    <p> wel come to the bus booking admin site for the afroperia bus booking site </p>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="save">
+</form>
 </body>
 </html>
