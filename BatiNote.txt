@@ -1,0 +1,19 @@
+
+
+1. Add Route admins, Subrote admins and bus admins
+2. Add Buses and Seat
+3. Add SingleBus
+4. Add Routes
+5. Add SubRoutes
+6. Add SubRouteBusAdmin  (each subroute has a bus)    
+7. Add SubRouteAdmin (each subroute has )
+8. Add Payment Method and Payment Information
+
+
+To manage subroute: 
+1. He must be both SubRoute admin and that SubRouteBus admin
+
+
+
+Left:
+Book cancelation and Book expiration

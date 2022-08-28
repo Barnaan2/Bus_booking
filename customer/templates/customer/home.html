@@ -1,0 +1,25 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+
+
+
+<div>
+    <h2>Routes</h2>
+    {% for route in routes %}
+    <p><a href="{% url 'route' route.id %}">{{route.name}}</a></p>
+    {%endfor%}
+</div>
+
+
+<div>
+    <h2>Route Start</h2>
+    <p><a href="{% url 'home' %}">All </a></p>
+
+    {% for route in routes %}
+    <p><a href="{% url 'home' %}?q={{route.start}}">{{route.start}}</a></p>
+
+    {%endfor%}
+</div>
+
+
+
+{%endblock content%}

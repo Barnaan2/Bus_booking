@@ -74,6 +74,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'Bus_booking.wsgi.application'
 
 
@@ -86,6 +88,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bus_booking_with_team',
+#         'USER':'root',
+#         'PASSWORD':'password',
+#         'HOST':'127.0.0.1',
+#         'PORT':'3306',
+#               'OPTIONS': {  
+#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  
+#         }  
+#     }
+# }
 
 
 # Password validation
