@@ -14,3 +14,10 @@ class Bus(models.Model):
     
     def __str__(self):
         return self.name
+
+class BusAdmin(models.Model):
+    user=models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    bus=models.ForeignKey(Bus, null=True, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.bus.name

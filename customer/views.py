@@ -1,9 +1,11 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.models import User
 from .models import Booking
 from bus_admin.models import Route,  Single_Bus, Seat, SubRoute
+from booker.models import FinishPayment
 from system_admin.models import Bus
 from django.contrib.auth.forms import UserCreationForm
 ### please do not import all classes from .models because there may be error while login
@@ -37,11 +39,13 @@ def route(request, pk):
 def booking(request, pk):
     
     subroute=SubRoute.objects.get(id=pk)
+    seats=Seat.objects.all()
     if request.method=='POST':
     
         book=Booking.objects.create(
         user=request.user,
         route=subroute.main_route,
+        sub_route=subroute,
         bus=subroute.bus,
         start=subroute.main_route.start,
         destination=subroute.main_route.destination,
@@ -54,7 +58,7 @@ def booking(request, pk):
         )
         return redirect ('my-booking', pk=request.user.id)
     
-    context={}
+    context={'seats':seats}
     return render(request, 'customer/booking.html', context)
     
     
@@ -64,6 +68,22 @@ def myBooking(request, pk):
     
     context={'bookings':bookings}
     return render(request, 'customer/my_booking.html', context)
+
+def pay(request, pk):
+    booking=Booking.objects.get(id=pk)
+    payment_infos=booking.route.paymentinformantion_set.all()
+    
+    if request.method == 'POST':
+        finishpymnt=FinishPayment.objects.create(
+        booking=booking,
+        payment_method_id=request.POST['payment_method'],
+        paid_by=request.POST['paid_by'],
+        transaction_id=request.POST['transaction_id'],
+        )
+        return redirect ('my-booking', pk=request.user.id)
+    
+    context={'booking':booking, 'payment_infos':payment_infos}
+    return render(request, 'customer/pay.html', context)
 
 def loginPage(request):
     page='login'

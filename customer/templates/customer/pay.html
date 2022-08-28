@@ -1,0 +1,42 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+<h2>Pay Through</h2>
+
+<div>
+    {% for payment_info in payment_infos %}
+
+    <div> {{ payment_info.payment_method.name }} -- {{payment_info.payment_method.type}} -- {{payment_info.payment_method.description}} -- {{payment_info.payment_method.code}} -- {{payment_info.payment_method.contact}}
+        <hr>
+        <div>
+            {{payment_info.account_holder}} - {{payment_info.account_number}} - {{payment_info.phone_number}}
+
+        </div>
+        <hr>
+        <hr> </div>
+    {%endfor%}
+
+</div>
+
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="payment_method">Payment Method:</label> <br>
+        <select id="payment_method" name="payment_method">
+        {% for payment_info in payment_infos %} 
+      
+    <option name="payment_method" value="{{payment_info.payment_method.id}}">{{payment_info.payment_method.name}}</option>
+   {%endfor%}
+        </select> <br>
+
+        <label for="paid_by">Paid by:</label>
+        <input type="text" class="form-control" id="paid_by" name="paid_by"><br>
+
+        <label for="transaction_id">Transaction Id:</label>
+        <input type="text" class="form-control" id="transaction_id" name="transaction_id"><br>
+
+        <input type="submit" value="Submit">
+
+    </form>
+</div>
+
+
+{%endblock content%}
