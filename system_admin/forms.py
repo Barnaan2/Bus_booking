@@ -4,5 +4,5 @@ from . models import BusBrand
 class BusBrandForm(ModelForm):
     class Meta:
         model = BusBrand
-        field = ['name','head_quarter','number_of_buses']
+        fields = ['name','head','number_of_buses']
 

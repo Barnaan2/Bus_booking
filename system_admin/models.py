@@ -24,7 +24,7 @@ class BusAdmin(models.Model):
 class BusBrand(models.Model):
     name = models.CharField(max_length=50)
     head = models.CharField(max_length = 50)
-    number_buses = models.IntegerField()
+    number_of_buses = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
