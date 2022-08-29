@@ -1,0 +1,27 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+
+
+
+<div>
+    <h2>Routes</h2>
+    {% for subroute in subroutes %}
+    {{ subroute.name }}
+    <!-- <p><a href="{% url 'route' subroute.id %}">{{subroute.name}}</a></p> -->
+    {%endfor%}
+</div>
+
+
+<div>
+    <h2>Route Start</h2>
+    <p><a href="{% url 'home' %}">All </a></p>
+
+    {% for subroute in subroutes %}
+    {{ subroute.name }}
+    <!-- <p><a href="{% url 'home' %}?q={{subroute.start}}">{{subroute.start}}</a></p> -->
+
+    {%endfor%}
+</div>
+
+
+
+{%endblock content%}

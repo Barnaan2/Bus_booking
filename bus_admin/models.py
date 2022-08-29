@@ -15,7 +15,7 @@ class Bus(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str((self.bus.name, self.bus_number,self.bus_plate_number))
+        return str((self.bus_brand.name, self.bus_number,self.bus_plate_number))
 
 class Route(models.Model): 
  # route_admin=models.ManyToManyField(User, related_name="route_admin")
@@ -32,19 +32,19 @@ class Route(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str(self.name)
+        return str((self.first_city,self.second_city))
      
    
 "Because every Route may have more than one bus"
 
 
 class SubRouteAdmin(models.Model):
-    user =models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    admin_at = models.CharField(max_length=255, null=True)
-    route =models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    admin_at_city = models.CharField(max_length=254, null=True)
+    route = models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
-        return (self.user.username)
+        return ((self.user.username))
         
 
 # class SubRouteBusAdmin(models.Model):

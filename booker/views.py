@@ -1,12 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from booker.models import SubRoute 
-# from customer.models import Booking
-from system_admin.models import BusAdmin,Route, SubRouteAdmin
-# from .models import FinishPayment, FinishPaymentStatus
-from .forms import SubRouteForm
-# Create your views here.
+from bus_admin.models import SubRouteAdmin
+from . models import SubRoute 
+from . forms import SubRouteForm
+
 
 
 
@@ -59,13 +57,12 @@ def manage_subroute(request):
 
 
 def add_subroute(request):
-    subroute_admin = SubRouteAdmin.objects.filter(user=request.user).first()
     form = SubRouteForm()
     if request.method == "POST":
         form = SubRouteForm(request.POST)
         if form.is_valid():
            subroute =  form.save(commit=False)
-           subroute.admin_at = subroute_admin.admin_at
+           subroute.subroute_admin.add(SubRouteAdmin.objects.filter(user=request.user).first())
            subroute.save()
            return redirect("subroute_home")
     context = {'form':form}

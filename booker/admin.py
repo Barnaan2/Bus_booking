@@ -1,8 +1,5 @@
 from django.contrib import admin
-from .models import PaymentInformantion, PaymentMethod, FinishPayment, FinishPaymentStatus
+from .models import SubRoute
 # Register your models here.
 
-admin.site.register(PaymentInformantion)
-admin.site.register(PaymentMethod)
-admin.site.register(FinishPayment)
-admin.site.register(FinishPaymentStatus)
+admin.site.register(SubRoute)

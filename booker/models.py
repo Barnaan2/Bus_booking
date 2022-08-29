@@ -1,12 +1,13 @@
 from django.db import models
-from bus_admin.models import Route,Bus
+from bus_admin.models import Bus,SubRouteAdmin
+from django.contrib.auth.models import User
 # from customer.models import Booking
 # Create your models here.
 
     
 class SubRoute(models.Model):
-    main_route=models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
-    bus=models.ForeignKey(Bus, on_delete=models.SET_NULL, null=True)
+    subroute_admin = models.ForeignKey (SubRouteAdmin,on_delete=models.SET_NULL, null=True)
+    bus = models.ForeignKey(Bus, on_delete=models.SET_NULL, null=True)
     """ this start should set by the system its equal where the Booker is a subroute admin at"""
     start = models.CharField(max_length=255, null=True)
     destination=models.CharField(max_length=255, null=True)
@@ -16,7 +17,7 @@ class SubRoute(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str(( self.bus.bus.name, self.bus.bus_number)) 
+        return str((self.start,self.destination, self.bus.bus_plate_number, self.bus.bus_number)) 
 
 # class PaymentMethod(models.Model):
 #     name = models.CharField(max_length=55)

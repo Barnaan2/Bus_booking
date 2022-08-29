@@ -2,11 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.models import User
-from .models import Booking
-from bus_admin.models import Route,  Single_Bus, Seat, SubRoute
-from booker.models import FinishPayment
-from system_admin.models import Bus
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm 
+from booker.models import SubRoute
 ### please do not import all classes from .models because there may be error while login
 
 from django.contrib.auth import authenticate, login, logout
@@ -18,7 +15,6 @@ def home(request):
     q=request.GET.get('q') if request.GET.get('q') != None else ''
     subroutes=SubRoute.objects.filter(
     
-        Q(name__icontains=q) |
         Q(start__icontains=q) |
         Q(destination__icontains=q)|
         Q(travel_date__icontains=q)
