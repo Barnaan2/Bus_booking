@@ -12,16 +12,28 @@ def index(request):
     return render (request,'system_admin/index.html')
 
 
+def manage_bus_brand(request):
+    bus_brand = BusBrand.object.all()
+    # this method also handles search and detail functionalities
+    q = None
+    if request.method == 'GET' and q != None:
+        q = request.GET.get(q)
+        bus_brand = BusBrand.objects.filter(
+            Q(number_of_bus__icontains=q) |
+            Q(name__icontains=q))
+    context = {'bus_brands':bus_brand}
+    return render(request,'system_admin/manage_bus_brand.html',context)
 # manage the bus
-def add_bus_brand(request):
-    form = BusBrandForm()
-    if request.method == "POST":
-        form = BusBrandForm(request.POST)
-        if form.is_valid():
-               bus_brand = form.save()
-               return redirect('add_bus_admin', bus_brand.id)
-    context = {"form":form}
-    return render(request,'system_admin/new.html',context)
+# def add_bus_brand(request):
+#     form = BusBrandForm()
+#     if request.method == "POST":
+#         form = BusBrandForm(request.POST)
+#         if form.is_valid():
+#                bus_brand = form.save()
+               
+#                return redirect('add_bus_admin', bus_brand.id)
+#     context = {"form":form}
+#     return render(request,'system_admin/new.html',context)
 
 def update_bus_brand(request,id):
     bus_brand  = BusBrand.objects.get(id=id)
@@ -35,18 +47,7 @@ def update_bus_brand(request,id):
     return redirect(request,'system_admin/edit.html',context)
         
 # view all buses
-def getBus(request):
-    bus_brand = BusBrand.object.all()
-    # this method also handles search and detail functionalities
-    q = None
-    page = None
-    if request.method == 'GET' and q != None:
-        q = request.GET.get(q)
-        bus_brand = BusBrand.objects.filter(
-            Q(number_of_bus__icontains=q) |
-            Q(name__icontains=q))
-    context = {'BusBrand':bus_brand}
-    return render(request,'system_admin/manage_bus_brand.html',context)
+
 
 # # Bus admin registration
 # def Bus_admin(request, id):

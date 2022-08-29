@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
-from system_admin.models import Bus
+from system_admin.models import  BusBrand
 # Create your models here.
 
 
-class Single_Bus(models.Model):
-    bus=models.ForeignKey(Bus, on_delete=models.CASCADE, null=True)
+class Bus(models.Model):
+    bus_brand = models.ForeignKey(BusBrand, on_delete=models.CASCADE, null=True)
+    bus_plate_number = models.IntegerField()
     bus_number=models.CharField(max_length=200, null=True)
     bus_type=models.CharField(max_length=200, null=True)
     bus_detail=models.CharField(max_length=200, null=True)
@@ -14,16 +15,15 @@ class Single_Bus(models.Model):
     created=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return str((self.bus.name, self.bus_number))
+        return str((self.bus.name, self.bus_number,self.bus_plate_number))
 
-class Route(models.Model):
-    route_admin=models.ManyToManyField(User, related_name="route_admin")
-    name=models.CharField(max_length=255, null=True)
-    start=models.CharField(max_length=255, null=True)
-    destination=models.CharField(max_length=255, null=True)
-    via_cities=models.CharField(max_length=255, null=True)
-    travel_date=models.DateField(null=True)
-    travel_begin_time=models.TimeField(null=True)
+class Route(models.Model): 
+ # route_admin=models.ManyToManyField(User, related_name="route_admin")
+#  the two cities should be foreign  key for city
+    first_city = models.CharField(max_length=255, null=True)
+    second_city = models.CharField(max_length=255, null=True)
+    # name=models.CharField(max_length=255, null=True)
+    via_cities = models.CharField(max_length=255, null=True)
     travel_distance=models.IntegerField(null=True)
     travel_aproximate_time=models.CharField(max_length=255, null=True)
     single_seat_price=models.IntegerField(null=True)
@@ -36,37 +36,31 @@ class Route(models.Model):
      
    
 "Because every Route may have more than one bus"
-    
-class SubRoute(models.Model):
-    main_route=models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
-    bus=models.ForeignKey(Single_Bus, on_delete=models.SET_NULL, null=True)
-    
-    def __str__(self):
-        return str((self.main_route.name, self.bus.bus.name, self.bus.bus_number)) 
 
 
 class SubRouteAdmin(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    sub_route=models.ForeignKey(SubRoute, on_delete=models.CASCADE, null=True)
+    user =models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    admin_at = models.CharField(max_length=255, null=True)
+    route =models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
     
     def __str__(self):
         return (self.user.username)
         
 
-class SubRouteBusAdmin(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    subroute_bus=models.ManyToManyField(Single_Bus)
+# class SubRouteBusAdmin(models.Model):
+#     user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+#     subroute_bus=models.ManyToManyField(Single_Bus)
     
-    def __str__(self):
-        return (self.user.username)
+#     def __str__(self):
+#         return (self.user.username)
 
 """I added this class for seat"""
 "You need to add bunch of seat_no (1, 2,3,4,5,6,..."
 "Then we will do on how to display seat lists based on a particular bus number of seat"
 "Before you go to book please first add seat"
-class Seat(models.Model):
-    seat_no=models.IntegerField()
+# class Seat(models.Model):
+#     seat_no=models.IntegerField()
     
-    def __str__(self):
-        return str(self.seat_no) 
+#     def __str__(self):
+#         return str(self.seat_no) 
     
