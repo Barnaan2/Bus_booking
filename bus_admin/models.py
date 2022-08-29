@@ -34,7 +34,7 @@ class Route(models.Model):
     def __str__(self):
         return str(self.name)
      
-     
+   
 "Because every Route may have more than one bus"
     
 class SubRoute(models.Model):
@@ -42,8 +42,23 @@ class SubRoute(models.Model):
     bus=models.ForeignKey(Single_Bus, on_delete=models.SET_NULL, null=True)
     
     def __str__(self):
-        return self.main_route.name 
+        return str((self.main_route.name, self.bus.bus.name, self.bus.bus_number)) 
 
+
+class SubRouteAdmin(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    sub_route=models.ForeignKey(SubRoute, on_delete=models.CASCADE, null=True)
+    
+    def __str__(self):
+        return (self.user.username)
+        
+
+class SubRouteBusAdmin(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    subroute_bus=models.ManyToManyField(Single_Bus)
+    
+    def __str__(self):
+        return (self.user.username)
 
 """I added this class for seat"""
 "You need to add bunch of seat_no (1, 2,3,4,5,6,..."

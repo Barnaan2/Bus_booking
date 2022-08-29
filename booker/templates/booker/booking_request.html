@@ -1,0 +1,52 @@
+{% extends 'booker/bookermain.html'%} {% block content%}
+
+<div>
+    <table>
+        <tr>
+            <th>Bus</th>
+            <th>Traveling Customer</th>
+            <th>Route</th>
+            <th>Travel start</th>
+            <th>Travel Destination</th>
+            <th>Travel Date</th>
+            <th>Travel Begin Time</th>
+            <th>Booked Seat</th>
+            <th>Number of reserved seat</th>
+            <th>Paid Through</th>
+            <th>Paid by</th>
+            <th>Transaction ID</th>
+
+            <th>Status</th>
+        </tr>
+        {% for booking in bookings%} {%if booking.sub_route == sub_route %}
+        <tr>
+            <td>{{booking.bus}}</td>
+            <td>{{booking.user.username}}</td>
+            <td>{{booking.route.name}}</td>
+            <td>{{booking.start}}</td>
+            <td>{{booking.destination}}</td>
+            <td>{{booking.travel_date}}</td>
+            <td>{{booking.travel_begin_time}}</td>
+            <td>{{booking.seat}}</td>
+            <td>Please anyone who knows counting ...</td>
+            <td> {{booking.finishpymnt_booking.payment_method.payment_method.name}}</td>
+            <td> {{booking.finishpymnt_booking.paid_by}}</td>
+            <td> {{booking.finishpymnt_booking.transaction_id}}</td>
+            <td>
+                {%if booking.finishpymnt_booking.finishpayment_status.fnishpayment_id == booking.id%} {%if booking.finishpymnt_booking.finishpayment_status.status is True %}<button class="btn btn-primary">Paid</button> {%else%}
+                <button class="btn btn-danger">NotPaid</button>{%endif%}
+</div> {%else%}<a href="{% url 'paid-unpaid' booking.id %}">Paid/NotPaid</a> {%endif%}
+</td>
+
+
+
+</tr>
+{%else%}
+<tr>
+    <td>Not your route</td>
+</tr>{%endif%}{%endfor%}
+</table>
+</div>
+
+
+{%endblock content%}

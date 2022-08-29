@@ -26,7 +26,7 @@
 
         <label>Seat: </label> {% for seat in seats %}
         <input type="checkbox" value="{{seat.seat_no}}" class="checkvalues"> {%endfor%}
-        <input type="text" name="seat" id="txtvalues">
+        <input type="text" name="seat" id="txtvalues" readonly>
         <input type="submit" value="Book">
     </form>
 </div>
