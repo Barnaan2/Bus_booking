@@ -58,11 +58,13 @@ def manage_subroute(request):
 
 def add_subroute(request):
     form = SubRouteForm()
+    subroute_admin = SubRouteAdmin.objects.filter(user=request.user).first()
     if request.method == "POST":
         form = SubRouteForm(request.POST)
         if form.is_valid():
            subroute =  form.save(commit=False)
-           subroute.subroute_admin.add(SubRouteAdmin.objects.filter(user=request.user).first())
+           subroute.subroute_admin = SubRouteAdmin.objects.filter(user=request.user).first()
+           subroute.route = subroute_admin.route
            subroute.save()
            return redirect("subroute_home")
     context = {'form':form}

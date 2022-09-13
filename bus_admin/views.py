@@ -7,7 +7,7 @@ from . forms import BusForm,RouteForm
 # Create your views here.
 # manage bus admim
 def index(request):
-    
+    # i used this to add the right thing letter when we decide what pass to the index page.
     context = {"place_holder": "place holder"}
     return render(request,'bus_admin/home.html',context)
 
@@ -24,7 +24,7 @@ def add_bus(request):
         form = BusForm(request.POST)
         if form.is_valid():
            bus = form.save(commit=False)
-           bus.bus_brand.add(bus_brand = BusBrand.objects.filter(user=request.user).first())
+           bus.bus_brand.add = BusBrand.objects.filter(user=request.user).first()
            bus.save()
            return redirect('bus_admin_home')
         context = {'form':form}
@@ -69,7 +69,7 @@ def add_route(request):
         form = RouteForm(request.POST)
         if form.is_valid():
            route =  form.save(commit=False)
-           route.bus_brand.add(bus_brand = BusBrand.objects.filter(user=request.user).first())
+           route.bus_brand = BusBrand.objects.filter(user=request.user).first()
            route.save()
            return redirect("route_home")
     context = {'form':form}
