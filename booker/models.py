@@ -1,5 +1,6 @@
 from django.db import models
-from bus_admin.models import Bus,SubRouteAdmin
+from bus_admin.models import Bus,SubRouteAdmin,Route
+
 from django.contrib.auth.models import User
 # from customer.models import Booking
 # Create your models here.
@@ -7,6 +8,7 @@ from django.contrib.auth.models import User
     
 class SubRoute(models.Model):
     subroute_admin = models.ForeignKey (SubRouteAdmin,on_delete=models.SET_NULL, null=True)
+    Route = models.ForeignKey(Route,on_delete=models.SET_NULL, null=True)
     bus = models.ForeignKey(Bus, on_delete=models.SET_NULL, null=True)
     """ this start should set by the system its equal where the Booker is a subroute admin at"""
     start = models.CharField(max_length=255, null=True)
