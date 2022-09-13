@@ -6,7 +6,7 @@
     <h2>Routes</h2>
     {% for subroute in subroutes %}
     {{ subroute.name }}
-    <!-- <p><a href="{% url 'route' subroute.id %}">{{subroute.name}}</a></p> -->
+   
     {%endfor%}
 </div>
 
@@ -17,7 +17,6 @@
 
     {% for subroute in subroutes %}
     {{ subroute.name }}
-    <!-- <p><a href="{% url 'home' %}?q={{subroute.start}}">{{subroute.start}}</a></p> -->
 
     {%endfor%}
 </div>
