@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_softdelete.models import SoftDeleteModel
-from booker.models import Subroute
+from booker.models import SubRoute
 # from booking.models import BookingRequest
 
 # Create your models here.
@@ -25,7 +25,7 @@ class PaymentMethod(SoftDeleteModel, models.Model):
 
 
 class PaymentInformation(SoftDeleteModel,models.Model):
-    subroute = models.ForeignKey(Subroute , on_delete=models.CASCADE)
+    subroute = models.ForeignKey(SubRoute , on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     account_holder = models.CharField(max_length=100)
