@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from system_admin.models import  BusBrand
 # Create your models here.
 
-
 class Bus(models.Model):
     bus_brand = models.ForeignKey(BusBrand, on_delete=models.CASCADE, null=True)
     bus_plate_number = models.IntegerField()

@@ -1,0 +1,67 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+<main id="main">
+    <section id="horizontal-pricing" class="horizontal-pricing">
+        <div class="section-header">
+            <span> My Bookings </span>
+            <h2>Booking Story</h2>
+        </div>
+        <div class="container ">
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+
+                    <thead>
+                        <tr>
+
+                            <th scope="col">Traveler</th>
+                            <th scope="col">Traveling Bus</th>
+                            <th scope="col">Route</th>
+                            <th scope="col">Travel start</th>
+                            <th scope="col">Travel destination</th>
+                            <th scope="col">Travel date</th>
+                            <th scope="col">Travel Begin Time</th>
+                            <th scope="col">Number of Ticket(s)</th>
+                            <th scope="col">Total Price</th>
+                            <th scope="col">Paid Through</th>
+                            <th scope="col">Assigned Seat(s)</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings%}
+                        <tr>
+                            <td>{{booking.travaler_name}}</td>
+                            <td>{{booking.bus}}</td>
+                            <td>{{booking.sub_route.route}}</td>
+                            <td>{{booking.start}}</td>
+                            <td>{{booking.destination}}</td>
+                            <td>{{booking.travel_date}}</td>
+                            <td>{{booking.travel_begin_time}}</td>
+                            <td>{{booking.seat_quantity}}</td>
+                            <td>
+
+                                {% widthratio booking.sub_route.route.single_seat_price 1 booking.seat_quantity %}
+                            </td>
+                            <!-- <td> {{booking.finishpymnt_booking.payment_method.payment_method.name}}</td> -->
+                            <!-- <td> {{booking.assign_seat.seat_number}} </td> -->
+                            <!-- <td>{% if booking.id != booking.finishpymnt_booking.booking_id%}<a href="">Pay</a> {%else%}
+                    <p></p>
+                    {% if booking.id == booking.finishpymnt_booking.booking_id and booking.finishpymnt_booking.finishpayment_status.fnishpayment_id != booking.id%}<button class="btn btn-primary">Under Review</button> {%endif%} {%endif%}
+
+                    <p></p>
+                    {% if booking.id == booking.finishpymnt_booking.booking_id and booking.finishpymnt_booking.finishpayment_status.fnishpayment_id == booking.id and booking.finishpymnt_booking.finishpayment_status.status is True%}
+                    <button class="btn btn-success">Booked</button>{%else%}
+                    <p></p>
+                    {% if booking.id == booking.finishpymnt_booking.booking_id and booking.finishpymnt_booking.finishpayment_status.fnishpayment_id == booking.id and booking.finishpymnt_booking.finishpayment_status.status is False%}
+                    <button class="btn btn-danger">Not Booked</button> <br>Your payment didn't arrived, please call our customer service.{%endif%} {%endif%}
+
+                </td> -->
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+    </section>
+
+</main>
+
+{%endblock content%}

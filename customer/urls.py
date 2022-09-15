@@ -6,9 +6,8 @@ urlpatterns= [
     path('logout/', views.logoutUser, name="logout"),
     path('register/', views.registerPage, name="register"),
     path('', views.home, name="home"),
-    # path('route/<str:pk>/', views.route, name="route"),
-    # path('booking/<str:pk>/', views.booking, name="booking"),
-    # path('my-booking/<str:pk>/', views.myBooking, name="my-booking"),
+    path('sub-route/<str:pk>/', views.subRoute, name="sub-route"),
+    path('my-booking/<str:pk>/', views.myBooking, name="my-booking"),
     # path('pay/<str:pk>/booking', views.pay, name="pay"),
     
 ]

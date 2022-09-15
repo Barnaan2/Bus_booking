@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>log in</title>
+
+    <link rel="stylesheet" href="{% static 'customer_assets/logincss/hotel.min.css'%}">
+</head>
+
+<body class="hold-transition login-page">
+
+    {% if messages %}
+
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} {% block content %}{% endblock %}
+
+    <script src="{% static 'customer_assets/loginjs/adminlte.min.js '%}"></script>
+</body>
+
+</html>

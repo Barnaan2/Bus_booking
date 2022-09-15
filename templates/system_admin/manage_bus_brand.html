@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="GET">
+        <input type="text" placeholder="search here for  a bus brand" name="q">
+        <input type="submit" value="search">
+    </form>
+{% for brand in bus_brands %} 
+
+{{brand.name}}
+{{brand.number_of_buses}}
+<a href="{% url 'update_bus_brand' brand.id %}">edit</a>
+{% endfor %}
+</body>
+</html>

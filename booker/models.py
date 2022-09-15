@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # from customer.models import Booking
 # Create your models here.
 
-    
+
 class SubRoute(models.Model):
     subroute_admin = models.ForeignKey (SubRouteAdmin,on_delete=models.SET_NULL, null=True)
     route = models.ForeignKey(Route,on_delete=models.SET_NULL, null=True)
@@ -21,18 +21,6 @@ class SubRoute(models.Model):
     def __str__(self):
         return str((self.start,self.destination, self.bus.bus_plate_number, self.bus.bus_number)) 
 
-# class PaymentMethod(models.Model):
-#     name = models.CharField(max_length=55)
-#     type = models.CharField(max_length=55)
-#     # logo = models.ImageField(max_length=55)
-#     description = models.TextField()
-#     code = models.IntegerField()
-#     contact = models.IntegerField()
-#     updated = models.DateTimeField(auto_now=True)
-#     created = models.DateTimeField(auto_now_add=True)
-    
-#     def __str__(self):
-#         return self.name
 
 # class PaymentInformantion(models.Model):
 #     route = models.ForeignKey(Route, on_delete=models.CASCADE)

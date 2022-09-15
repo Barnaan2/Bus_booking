@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'bus_admin.apps.BusAdminConfig',
     'system_admin.apps.SystemAdminConfig',
+    'booking.apps.BookingConfig',
 
 ]
 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manage route</title>
+</head>
+<body>
+    <form action="" method="GET">
+        <input type="text" placeholder="search here for  a bus brand" name="q">
+        <input type="submit" value="search">
+    </form>
+{% for route in routes %} 
+
+{{route.first_city}}
+{{route.second_city}}
+<a href="{% url 'edit_route' route.id %}">edit</a>
+{% endfor %}
+</body>
+</html>
