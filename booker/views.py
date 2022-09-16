@@ -9,24 +9,22 @@ from . forms import SubRouteForm
 
 
 def home(request):
-    # user=User.objects.get(id=pk)
-    # subroute_bus_admins=user.subroutebusadmin_set.filter()
-    # subroute_bus=user.subroutebusadmin.subroute_bus.all()
-    # subroute_admins=user.subrouteadmin_set.filter()
-    # context={'user':user,  'subroute_admins':subroute_admins}
+    user=User.objects.get(id=pk)
+    subroute_bus_admins=user.subroutebusadmin_set.filter()
+    subroute_bus=user.subroutebusadmin.subroute_bus.all()
+    subroute_admins=user.subrouteadmin_set.filter()
+    context={'user':user,  'subroute_admins':subroute_admins}
 
-    # if request.user != user:
-    #        return HttpResponse("You are not allowed here!")
+    if request.user != user:
+           return HttpResponse("You are not allowed here!")
     return render(request, 'booker/home.html')
 
-# def bookingRequest(request, pk):
-#     sub_route=SubRoute.objects.get(id=pk)
-#     bookings=sub_route.booking_set.filter().order_by('-created') 
-#     finish_payment=FinishPayment.objects.filter()
-
-#     context={'sub_route':sub_route, 'bookings':bookings, 'finish_payment':finish_payment}
-
-#     return render(request, 'booker/booking_request.html', context)
+def bookingRequest(request, pk):
+    sub_route=SubRoute.objects.get(id=pk)
+    bookings=sub_route.booking_set.filter().order_by('-created') 
+    finish_payment=FinishPayment.objects.filter()
+    context={'sub_route':sub_route, 'bookings':bookings, 'finish_payment':finish_payment}
+    return render(request, 'booker/booking_request.html', context)
 
 
 # def finishPaymentStatus(request, pk):
@@ -69,8 +67,6 @@ def add_subroute(request):
            return redirect("subroute_home")
     context = {'form':form}
     return redirect(request,'booker/new.html',context)
-
-
 
 def update_subroute(request,id):
     subroute = SubRoute.objects.filter(id=id)
