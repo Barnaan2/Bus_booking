@@ -1,7 +1,5 @@
 from django.db import models
 from bus_admin.models import Bus,SubRouteAdmin,Route
-
-from django.contrib.auth.models import User
 # from customer.models import Booking
 # Create your models here.
 

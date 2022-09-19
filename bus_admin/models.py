@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
-from system_admin.models import  BusBrand
+from account.models import User
+from system_admin.models import  BusBrand, City
+
 # Create your models here.
 
 class Bus(models.Model):
@@ -17,11 +18,9 @@ class Bus(models.Model):
         return str((self.bus_brand.name, self.bus_number,self.bus_plate_number))
 
 class Route(models.Model): 
- # route_admin=models.ManyToManyField(User, related_name="route_admin")
 #  the two cities should be foreign  key for city
-    first_city = models.CharField(max_length=255, null=True)
-    second_city = models.CharField(max_length=255, null=True)
-    # name=models.CharField(max_length=255, null=True)
+    first_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    second_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     via_cities = models.CharField(max_length=255, null=True)
     travel_distance=models.IntegerField(null=True)
     travel_aproximate_time=models.CharField(max_length=255, null=True)
@@ -54,7 +53,7 @@ class SubRouteAdmin(models.Model):
 #         return (self.user.username)
 
 """I added this class for seat"""
-"You need to add bunch of seat_no (1, 2,3,4,5,6,..."
+"You need to add a bunch of seat_no (1, 2,3,4,5,6,..."
 "Then we will do on how to display seat lists based on a particular bus number of seat"
 "Before you go to book please first add seat"
 # class Seat(models.Model):

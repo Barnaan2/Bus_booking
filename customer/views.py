@@ -55,46 +55,46 @@ def myBooking(request, pk):
 #     context={'booking':booking, 'payment_infos':payment_infos}
 #     return render(request, 'customer/pay.html', context)
 
-def loginPage(request):
-    page='login'
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
+# def loginPage(request):
+#     page='login'
+#     if request.method=='POST':
+#         username=request.POST.get('username')
+#         password=request.POST.get('password')
 
-        try:
-             user=User.objects.get(username=username)
+#         try:
+#              user=User.objects.get(username=username)
            
-        except:
-            messages.error(request, 'Sorry! User does not exist.')
-        user=authenticate(request, username=username, password=password)
+#         except:
+#             messages.error(request, 'Sorry! User does not exist.')
+#         user=authenticate(request, username=username, password=password)
         
-        if user is not None:
+#         if user is not None:
            
-            login(request, user)
-            return redirect('home')
-        else :
-          messages.error(request, 'Sorry! username or password does not exist.')  
-    context={'page':page}
-    return render(request, 'customer/login_register.html', context)
+#             login(request, user)
+#             return redirect('home')
+#         else :
+#           messages.error(request, 'Sorry! username or password does not exist.')  
+#     context={'page':page}
+#     return render(request, 'customer/login_register.html', context)
 
 
-def logoutUser(request):
-    logout(request)
-    return redirect('home')
+# def logoutUser(request):
+#     logout(request)
+#     return redirect('home')
 
 
-def registerPage(request):
-    page='register'
-    form=UserCreationForm()
+# def registerPage(request):
+#     page='register'
+#     form=UserCreationForm()
     
-    if request.method =='POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user=form.save()
-            user.is_active = True
-            user.save()
-            return redirect('home')
-        else:
-            messages.error(request, "An error occured during registration")
-    context={'page':page, 'form':form}
-    return render(request, 'customer/login_register.html', context)
+#     if request.method =='POST':
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             user=form.save()
+#             user.is_active = True
+#             user.save()
+#             return redirect('home')
+#         else:
+#             messages.error(request, "An error occured during registration")
+#     context={'page':page, 'form':form}
+#     return render(request, 'customer/login_register.html', context)

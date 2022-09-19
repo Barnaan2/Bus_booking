@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'booking.apps.BookingConfig',
 
 ]
+# this the custom user model. 
+AUTH_USER_MODEL = 'account.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

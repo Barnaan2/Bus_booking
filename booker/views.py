@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from account.models import User
 from bus_admin.models import SubRouteAdmin
 from . models import SubRoute 
 from . forms import SubRouteForm
@@ -8,7 +8,7 @@ from . forms import SubRouteForm
 
 
 
-def home(request):
+def home(request,pk):
     user=User.objects.get(id=pk)
     subroute_bus_admins=user.subroutebusadmin_set.filter()
     subroute_bus=user.subroutebusadmin.subroute_bus.all()
@@ -22,7 +22,8 @@ def home(request):
 def bookingRequest(request, pk):
     sub_route=SubRoute.objects.get(id=pk)
     bookings=sub_route.booking_set.filter().order_by('-created') 
-    finish_payment=FinishPayment.objects.filter()
+    # finish_payment=FinishPayment.objects.filter()
+    finish_payment = ""
     context={'sub_route':sub_route, 'bookings':bookings, 'finish_payment':finish_payment}
     return render(request, 'booker/booking_request.html', context)
 

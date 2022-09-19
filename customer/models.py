@@ -1,8 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
-from system_admin.models import BusBrand
-from bus_admin.models import Route  
-from booker.models import SubRoute
+from account.models import User
+
 # Create your models here.
 
 # class Booking(models.Model):
