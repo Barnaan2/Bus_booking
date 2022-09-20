@@ -14,6 +14,7 @@ class Booking(models.Model):
     travaler_name=models.CharField(max_length=255, null=True)
     traveler_contact=models.CharField(max_length=255, null=True)
     seat_quantity=models.CharField(max_length=2,  null=True)
+    status=models.CharField(max_length=25,default="Waiting")
     updated=models.DateTimeField(auto_now=True)
     created=models.DateTimeField(auto_now_add=True)
     

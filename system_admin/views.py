@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import render
-from . forms import BusBrandForm
-from . models import BusBrand
+from . forms import BusBrandForm,CityForm
+from . models import BusBrand,City
 from django.db.models import Q
 from django.contrib import messages
+
+from django.contrib.auth.decorators import login_required
+from system_admin.decorators import only_admins
 
 
 # Create your views here.
@@ -12,6 +15,10 @@ def index(request):
     return render (request,'system_admin/index.html')
 
 
+# ------------------------------------------------------------------------------------------------------|
+#                                                                                                      |
+#   MANAGE BUSBRAND
+# ------------------------------------------------------------------------------------------------------|
 def manage_bus_brand(request):
     bus_brand = BusBrand.object.all()
     # this method also handles search and detail functionalities
@@ -71,3 +78,56 @@ def update_bus_brand(request,id):
 #     return render(request, 'register.html', context)
    
 
+# ------------------------------------------------------------------------------------------------------|
+#                                                                                                      |
+#   MANAGE CITY
+# ------------------------------------------------------------------------------------------------------|
+@login_required(login_url='login')
+@only_admins
+def city(request):
+    cities = City.objects.all()
+    context = {'cities': cities}
+    return render(request, 'system_admin/manage_city.html', context)
+
+
+@login_required(login_url='login')
+@only_admins
+def add_city(request):
+    form = CityForm()
+    if request.method == "POST":
+        form = CityForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('system_admin')
+        else:
+            messages.error(request, 'there is error in your input try again')
+    context = {'form': form}
+    return render(request, 'system_admin/new.html', context)
+
+
+@login_required(login_url='login')
+@only_admins
+def update_city(request, id):
+    city = City.objects.get(id=id)
+    form = CityForm(instance=city)
+    if request.method == "POST":
+        form = CityForm(request.POST, instance=city)
+        if form.is_valid():
+            form.save()
+            # success message
+            messages.success(request, ' updated successfully')
+            return redirect('system_admin')
+    context = {'form': form}
+    return render(request, 'system_admin/edit.html', context)
+
+
+@login_required(login_url='login')
+@only_admins
+def delete_city(request, id):
+    city = City.objects.get(id=id)
+    if request.method == "POST":
+        city.delete()
+        messages.success(request, 'you have deleted the selected item!')
+        return redirect('index')
+    context = {'form': city}
+    return render(request, '', context)

@@ -1,6 +1,6 @@
 from django.db import models
 from account.models import User
-from booking.models import BookingRequest
+from booking.models import Booking
 from booker.models import SubRoute
 
 # Create your models here.
@@ -44,20 +44,45 @@ class PaymentInformation(models.Model):
 
 # when the customer is wlling to pay the customer will fillout the following form .
     
-class Paid(models.Model):
+# class Paid(models.Model):
+    
+#     booking_request = models.ForeignKey(BookingRequest, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=60)
+#     transaction_id = models.CharField(max_length=60)
+#     expected_payment = models.FloatField()
+#     amount = models.FloatField()
+#     picture = models.ImageField(null=True, default='payment_method.png')
+#     updated = models.DateTimeField(auto_now=True)
+#     created = models.DateTimeField(auto_now_add=True)
+
+#     def __str__(self):
+#         return self.name
+# # this is needed for production but for now let just comment it out.
+#     class Meta:
+#         unique_together = [['booking_request', 'transaction_id']]
+
+   
+class FinishPayment(models.Model):
+    booking=models.OneToOneField(Booking, on_delete=models.CASCADE, primary_key=True, related_name="finishpymnt_booking")
+    # payment_method=models.ForeignKey(PaymentInformantion, on_delete=models.CASCADE, blank=True, null=True)
     payment_information = models.ForeignKey(PaymentInformation, on_delete=models.CASCADE)
-    booking_request = models.ForeignKey(BookingRequest, on_delete=models.CASCADE)
-    name = models.CharField(max_length=60)
-    transaction_id = models.CharField(max_length=60)
-    expected_payment = models.FloatField()
-    amount = models.FloatField()
+    full_name = models.CharField(max_length=60)
+    # paid_by=models.CharField(max_length=255, null=True)
+    transaction_id=models.CharField(max_length=255, null=True)
     picture = models.ImageField(null=True, default='payment_method.png')
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
-
+    amount = models.FloatField()
+    updated=models.DateTimeField(auto_now=True)
+    created=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.name
-
-# this is needed for production but for now let just comment it out.
+        return self.full_name
+    
     class Meta:
-        unique_together = [['booking_request', 'transaction_id']]
+        unique_together = [['booking', 'transaction_id']]
+    
+    
+# class FinishPaymentStatus(models.Model):
+#     fnishpayment=models.OneToOneField(FinishPayment, on_delete=models.CASCADE, primary_key=True, related_name="finishpayment_status")
+#     status=models.BooleanField(default=False)
+    
+#     def __str__(self):
+#         return self.finishpayment

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django_softdelete.models import SoftDeleteModel
+# from django_softdelete.models import SoftDeleteModel
 
 
 class User(AbstractUser):

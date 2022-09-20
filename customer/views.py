@@ -13,13 +13,14 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
-    q=request.GET.get('q') if request.GET.get('q') != None else ''
-    routes=Route.objects.filter(
+    q=request.GET.get('q') 
+    if request.GET.get('q') != None: 
+      routes=Route.objects.filter(
     
         Q(first_city__icontains=q) |
-        Q(second_city__icontains=q)
-
-        )
+        Q(second_city__icontains=q) )
+    else:
+        routes = Route.objects.all()
     context={'routes':routes}
     return render(request, 'customer/home.html', context)
 

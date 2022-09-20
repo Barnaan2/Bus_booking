@@ -1,10 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from customer.decorators import only_customer
-from bus_admin.decorators import bus_only
-from booker.decorators import booker_only
-from system_admin.decorators import allowed_users, superuser_only
 from django.views.decorators.cache import never_cache
 from django.contrib.auth import authenticate, login, logout
 from .forms import OurUserCreationForm,UserForm
@@ -12,11 +8,9 @@ from .models import User
 from system_admin.models import BusBrand
 from bus_admin.models import SubRouteAdmin
 
-# from system_admin.models import Hotel
-
 
 # ------------------------------------------------------------------------------------------------------|
-#                                                                                   |
+#                                                                                   
 #   REGISTRATION AND USER MANAGEMENT
 # ------------------------------------------------------------------------------------------------------|
 def register(request):
@@ -27,13 +21,13 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            return redirect('home')
         else:
             context = {'form': form}
-            return render(request, 'register.html', context)
-
-    context = {'form': form}
-    return render(request, 'account/login_register.html', context)
+            return render(request, 'account/register.html', context)
+    role = "customer"
+    context = {"form":form,"role":role}
+    return render(request, 'account/register.html', context)
 
 
 @never_cache
@@ -43,10 +37,14 @@ def login_page(request):
     if request.user.is_authenticated:
         if request.user.role == 'customer':
             return redirect('index')
-        elif request.user.role == 'hotel_admin':
-            return redirect('hotel')
+        elif request.user.role == 'bus_admin':
+            return redirect('bus_admin_home')
+        elif request.user.role == 'booker':
+            return redirect('subroute_home')
         elif request.user.role == 'system_admin':
             return redirect('system_admin')
+        else:
+            return HttpResponse("Erorr code 000001,your account run into a problem. please contact customer survice...")
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -76,9 +74,9 @@ def login_page(request):
         else:
             messages.error(request, 'Password is incorrect ')
             return redirect('login')
-    page = "login"
-    context = {"page": page}  
-    return render(request, 'acccount/login_register.html', context )
+    
+ 
+    return render(request, 'account/login.html')
 
 
 # logout

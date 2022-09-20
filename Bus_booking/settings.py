@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'bus_admin.apps.BusAdminConfig',
     'system_admin.apps.SystemAdminConfig',
     'booking.apps.BookingConfig',
+    'account.apps.AccountConfig',
+    'payment.apps.PaymentConfig',
+    
+    
 
 ]
 # this the custom user model. 

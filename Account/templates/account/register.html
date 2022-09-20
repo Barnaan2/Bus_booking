@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="us-ascii">
+</head>
+<body class="hold-transition register-page">
+<p>{% load static %}</p>
+</body>
+</html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>register</title>
+<link href="{% static 'assets/css/hotel.min.css' %}" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" rel="stylesheet" />
+<div class="register-box">
+<div class="card card-outline card-primary">
+<div class="card-header text-center">{% if messages %} {% for message in messages %}
+<p>{{message}}</p>
+{% endfor %} {% endif %} <a class="h1" href="{% url 'home' %}">Afroperia Bus Booking</a></div>
+
+
+
+ <div id="phonex" class="alert alert-danger alert-dismissible fade show" style = "display: none">
+    <strong>Error!</strong> A problem has been occurred while submitting your data.
+    
+</div>
+
+<p ></p>
+<form action="" name= "validate" method="POST" onsubmit="checkInput(event);">{% csrf_token %} {% if form.errors %}
+<div class="alert alert-danger">{{ form.errors }}</div>
+{% endif %}
+
+<div class="input-group mb-3"><input class="form-control" name="{{form.first_name.name}}" placeholder = "firstname" type="text" />
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+
+<div class="input-group mb-3"><input class="form-control" name="{{ form.last_name.name }}" placeholder = "lastname" type="text" />
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+
+<div class="input-group mb-3"><input class="form-control" id="phone" name="{{ form.phone_number.name }}" type="number" onchange="validator()"  placeholder = "eg. 0911121314"/>
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+
+<div class="input-group mb-3"><input class="form-control" name="{{ form.username.name }}" placeholder = "username" type="text" />
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+
+<div class="input-group mb-3"><input class="form-control" name="{{ form.password1.name }}" placeholder="Password" type="password" />
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+
+<div class="input-group mb-3"><input class="form-control" name="{{form.password2.name}}" placeholder="Retype password" type="password" />
+<div class="input-group-append">
+<div class="input-group-text"></div>
+</div>
+</div>
+<input class="form-control" name="{{form.role.name}}" type="hidden" value="customer" />
+<div class="row">
+<div class="col-8"></div>
+<!-- /.col -->
+
+<div class="col-4"><button class="btn btn-primary btn-block" type="submit">Register</button></div>
+<!-- /.col --></div>
+</form>
+
+<div id= class="alert alert-info" style="display: none;"></div>
+<a class="text-center" href="{% url 'login' %}">I already have a membership</a></div>
+<!-- /.form-box --></div>
+<!-- /.card --></div>
+<!-- /.register-box --><script src="{% static 'assets/js/adminlte.min.js' %}"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script><script>
+    function getIp(callback) {
+      fetch('https://ipinfo.io/json?token=<your token>', { headers: { 'Accept': 'application/json' }})
+        .then((resp) => resp.json())
+        .catch(() => {
+          return {
+            country: 'et',
+          };
+        })
+        .then((resp) => callback(resp.country));
+     }
+
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+      initialCountry: "Et",
+      geoIpLookup: getIp,
+      utilsScript:
+        "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+     });
+
+    const info = document.querySelector(".alert-info");
+
+function process(event) {
+ event.preventDefault();
+
+ const phoneNumber = phoneInput.getNumber();
+
+
+ //info.style.display = "";
+ //info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+}
+
+  function validator(){
+        // this how to the phone number the user inserted and check it for unique in the backend 
+        var valid = false 
+       var printer = document.getElementById("phonex");
+        var  value = "" + document.validate.phone_number.value 
+        const count = value.length 
+        
+     
+  
+
+        if(count < 9)
+        {
+            printer.style = " Display:block";
+            printer.innerHTML = "invalid phone Number"
+         
+          
+         
+        }
+        else if( count == 10 && value.charAt(0) != 0 ){
+            
+             printer.style = " Display:block";
+            printer.innerHTML = "invalid phone Number"
+            
+
+        }
+        else if( count == 10 && value.charAt(0) == 0 ){
+     document.validate.phone_number.value = parseInt(document.validate.phone_number.value);
+       
+        valid = true;
+        printer.style = " Display:none";
+         
+        }
+        else if(count > 10){
+             printer.style = " Display:block";
+             printer.innerHTML = "your phone number is not valid"
+        }
+
+      else {
+          
+        valid = true;
+        printer.style = " Display:none";
+      }
+         
+     return valid;   
+    }
+   function checkInput(e){
+
+    var valid = validator()
+    
+    if(!valid){
+        
+        e.preventDefault()
+    }
+
+        
+    
+   
+   }
+
+  </script>

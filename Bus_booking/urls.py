@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('customer.urls')),
     path('booker/', include('booker.urls')),
     path('system_admin/',include('system_admin.urls')),
+    path('account/',include('account.urls')),
     path('booking/',include('booking.urls')),
   
 ]

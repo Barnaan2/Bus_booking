@@ -20,7 +20,7 @@ class Bus(models.Model):
 class Route(models.Model): 
 #  the two cities should be foreign  key for city
     first_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
-    second_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    second_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, related_name="second_city")
     via_cities = models.CharField(max_length=255, null=True)
     travel_distance=models.IntegerField(null=True)
     travel_aproximate_time=models.CharField(max_length=255, null=True)

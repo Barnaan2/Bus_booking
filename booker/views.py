@@ -3,29 +3,21 @@ from django.http import HttpResponse
 from account.models import User
 from bus_admin.models import SubRouteAdmin
 from . models import SubRoute 
+from . decorators import booker_only
 from . forms import SubRouteForm
+from django.contrib.auth.decorators import login_required
 
 
-
-
-def home(request,pk):
-    user=User.objects.get(id=pk)
-    subroute_bus_admins=user.subroutebusadmin_set.filter()
-    subroute_bus=user.subroutebusadmin.subroute_bus.all()
-    subroute_admins=user.subrouteadmin_set.filter()
-    context={'user':user,  'subroute_admins':subroute_admins}
-
-    if request.user != user:
-           return HttpResponse("You are not allowed here!")
+@login_required(login_url='login')
+@booker_only
+def home(request):
+    subroute_admin = SubRouteAdmin.objects.filter(user=request.user).first()
+    subroutes = SubRoute.objects.filter(subroute_admin=subroute_admin)
+    context = {'subroutes': subroutes}
     return render(request, 'booker/home.html')
 
-def bookingRequest(request, pk):
-    sub_route=SubRoute.objects.get(id=pk)
-    bookings=sub_route.booking_set.filter().order_by('-created') 
-    # finish_payment=FinishPayment.objects.filter()
-    finish_payment = ""
-    context={'sub_route':sub_route, 'bookings':bookings, 'finish_payment':finish_payment}
-    return render(request, 'booker/booking_request.html', context)
+
+
 
 
 # def finishPaymentStatus(request, pk):

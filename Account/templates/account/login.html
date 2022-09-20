@@ -1,11 +1,11 @@
-{% extends 'customer/login_register_main.html'%} {% block content%}
+{% extends 'account/login_register_main.html'%} {% block content%}
 
 <div class="login-box">
     <div class="login-logo">
         <a href="{% url 'home' %}">Afroperia-Bus-Booking</a>
     </div>
     <!-- /.login-logo -->
-    {% if page == 'login' %}
+ 
     <div class="card">
         <div class="card-body login-card-body">
             <form method="POST" action="">
@@ -46,22 +46,6 @@
             <a class="text-center" href="{% url 'register' %}"> Register</a>
         </div>
     </div>
-
-    {%else%}
-    <div>
-        <form method="POST" action="">
-            {% csrf_token %} {{form.as_p}}
-            <input type="submit" value="Register">
-        </form>
-
-        <p>
-            Already a member?
-        </p>
-        <a href="{% url 'login' %}"> Login</a>
-    </div>
-    {%endif%}
-
-</div>
 
 
 {% endblock content%}
