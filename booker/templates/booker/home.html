@@ -1,12 +1,7 @@
-{% extends 'booker/bookermain.html'%} {% block content%}
-
-<div>
-    {% for subroute_bus_admin in subroute_bus_admins %} Subroute Bus Admin: Hello {{subroute_bus_admin.user.username}} {% for subroute_bus in subroute_bus_admin.subroute_bus.all %} {% for subroute_admin in subroute_admins %} {% if subroute_bus == subroute_admin.sub_route.bus%}
-    <p>Route: {{subroute_admin.sub_route.main_route.name}} <br> Traveling Subroute Bus: {{subroute_admin.sub_route.bus.bus.name}} <br> Traveling Subroute Bus number: {{subroute_admin.sub_route.bus.bus_number}}</p>
-
-    <div>
-        <p><a href="{% url 'booking-request' subroute_admin.sub_route.id %}">Booking Request</a></p>
-    </div>
-    <hr> {%endif%} {%endfor%} {%endfor%} {%endfor%}
-</div>
-{%endblock content%}
+<html>
+    <head>   
+    </head>
+    <body>
+      <p> this is the home page for booker</p>  
+    </body>
+</html>

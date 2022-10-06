@@ -41,8 +41,15 @@ INSTALLED_APPS = [
     'customer.apps.CustomerConfig',
     'bus_admin.apps.BusAdminConfig',
     'system_admin.apps.SystemAdminConfig',
+    'booking.apps.BookingConfig',
+    'account.apps.AccountConfig',
+    'payment.apps.PaymentConfig',
+    
+    
 
 ]
+# this the custom user model. 
+AUTH_USER_MODEL = 'account.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

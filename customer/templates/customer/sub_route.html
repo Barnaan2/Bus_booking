@@ -1,0 +1,37 @@
+{% extends 'customer/customermain.html'%} {% block content%}
+
+<main id="main">
+    <section>
+        <div class="container">
+            <div class="row gy-4">
+                {% for sub_route in sub_routes %}
+                <div class="col-lg-4 col-md-4">
+                    <div class="card">
+
+                        <h3 class="text-center ">{{sub_route.start}} - {{sub_route.destination}}</h3>
+                        <ul>
+                            <li>Traveling bus: {{sub_route.bus.bus_brand.name}}</li>
+                            <li>Traveling bus type: {{sub_route.bus.bus_plate_number}} - {{sub_route.bus.bus_number}}</li>
+                            <li>Travel start:{{sub_route.start}}</li>
+                            <li>Travel destination:{{sub_route.destination}}</li>
+                            <li>Via cities: {{route.via_cities}}</li>
+                            <li>Distance: {{route.travel_distance}} km</li>
+                            <li>Travel approximate time length: {{route.travel_aproximate_time}}</li>
+                            <li>Single ticket price: {{route.single_seat_price}}</li>
+                            <li>Travel date: {{sub_route.travel_date}}</li>
+                            <li>Travel begin time: {{sub_route.travel_begin_time}}</li>
+                            <li>Bus facilities: {{sub_route.route.travel_facilities}}</li>
+                        </ul>
+
+                        <a href="{% url 'booking' sub_route.id %} " class="text-center "><button class="btn btn-primary ">Book Now</button></a>
+                    </div>
+                </div>
+                {%endfor%}
+                <!-- End Card Item -->
+
+            </div>
+
+        </div>
+    </section>
+</main>
+{%endblock content%}

@@ -1,24 +1,183 @@
-{% extends 'customer/customermain.html'%} {% block content%}
+ {% extends 'customer/customermain.html'%} {% block content%}
 
 
 
-<div>
-    <h2>Routes</h2>
-    {% for route in routes %}
-    <p><a href="{% url 'route' route.id %}">{{route.name}}</a></p>
-    {%endfor%}
-</div>
+<section id="hero" class="hero d-flex align-items-center ">
+    <div class="container">
+        <div class="row gy-4 d-flex gx-5 ">
+            <div class="col-lg-6 order-1 order-lg-1 d-flex flex-column justify-content-center">
+                <h2 data-aos="fade-up">Book a bus of your route choice</h2>
+                <p data-aos="fade-up" data-aos-delay="100">Go farther in Ethiopia</p>
+                <div>
+                    <div class="col-lg-12 text-center">
+                        <small>You can search for your travel start, destination or date here</small>
+                        <form method="GET" action="{% url 'home' %}" class="form-search d-flex align-items-stretch mb-3   justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                            <input type="text" name="q" class="form-control" placeholder="Search route start, destination or date of travel ...">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
 
 
-<div>
-    <h2>Route Start</h2>
-    <p><a href="{% url 'home' %}">All </a></p>
+                    </div>
 
-    {% for route in routes %}
-    <p><a href="{% url 'home' %}?q={{route.start}}">{{route.start}}</a></p>
+                </div>
 
-    {%endfor%}
-</div>
+            </div>
+
+            <div class="col-lg-6 order-1 col-sm order2 d-flex flex-column  ">
+                {% load static %}
+                <img src="{% static 'images/bus.jpg'%}" alt="Bus Image" />
+            </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- End Hero Section -->
+
+
+
+<main id="main">
+
+
+    <div class="row p-3 bg-secondary  gy-2  ">
+        <div class="text-center search-for-route">
+            <p>You can search for your travel start and destination here</p>
+
+            <!-- To search for date route class should have travel_date attribute -->
+        </div>
+        <form method="GET" action="{% url 'home' %}">
+
+            <div class="col-sm-4 col-lg-6">
+                <select class="form-select p-3 pb-5 bg-light" aria-label="Default select example" name="q">
+            <option selected>From</option>
+                {% for route in routes %}
+            
+            <option value="{{route.first_city}}">{{route.first_city}}</option>
+
+            {%endfor%}
+          </select>
+            </div>
+
+            <div class="col-sm-4 col-lg-6">
+                <select class="form-select p-3 pb-5 bg-light " aria-label="Default select example" name="q">
+                <option selected>To</option>
+                {% for route in routes %}
+            
+            <option value="{{route.second_city}}">{{route.second_city}}</option>
+
+            {%endfor%}
+          </select>
+            </div>
+            <!-- To search for date route class should have travel_date attribute -->
+
+            <!-- <div class="col-sm-4 col-lg-6">
+            <div class="p-3  bg-light rounded">
+                <label>Departure</label>
+                <input id="startDate" class="form-control" type="date" />
+                <span id="startDateSelected"></span>
+            </div>
+        </div> -->
+            <div class="col-sm-4 col-lg-6">
+                <div class="p-3 pb-5 bg-light rounded text-center justify-content-center">
+
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <section id="service" class="services pt-0">
+        <div class="container">
+
+            <div class="section-header">
+                <span>Routes</span>
+                <a href="{% url 'home' %}">
+                    <h2>Routes</h2>
+                </a>
+
+            </div>
+
+            <div class="row gy-4">
+                {% for route in routes %}
+                <div class="col-lg-3 col-md-4">
+                    <div class="card">
+
+                        <h3><a href="{% url 'sub-route' route.id %}" class="stretched-link">{{route.first_city}} - {{route.second_city}}</a></h3>
+                        <p>Travel from {{route.first_city}} to {{route.second_city}}</p>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+
+
+
+    <section id="faq" class="faq  ">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header">
+                <span>Frequently Asked Questions</span>
+                <h2>Frequently Asked Questions</h2>
+
+            </div>
+
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+                <div class="col-lg-10">
+
+                    <div class="accordion accordion-flush" id="faqlist">
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                      <i class="bi bi-question-diamond-fill question-icon"></i>
+                     How to Book?
+                    </button>
+                            </h3>
+                            <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                                <div class="accordion-body">
+                                    You choose a route you want from list of routes. Then click on the desired route from the list and then you will see the buses going between the route then select the desired bus type and click the "Book Now" button, here you need to have account (registered)
+                                    and then login to your account and continue booking your route by clicking and filling in the form that follows,
+                                </div>
+                            </div>
+                        </div>
+                        <!-- # Faq item-->
+
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                      <i class="bi bi-question-diamond-fill question-icon"></i>
+                      How Do I Make Payments?
+                    </button>
+                            </h3>
+                            <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                                <div class="accordion-body">
+                                    Choose one of payment methods provided by route admin and pay through account details written on the payment page. </div>
+                            </div>
+                        </div>
+                        <!-- # Faq item-->
+
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- End Frequently Asked Questions Section -->
+
+</main>
+<!-- End #main -->
+
 
 
 

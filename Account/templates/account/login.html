@@ -1,0 +1,51 @@
+{% extends 'account/login_register_main.html'%} {% block content%}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="{% url 'home' %}">Afroperia-Bus-Booking</a>
+    </div>
+    <!-- /.login-logo -->
+ 
+    <div class="card">
+        <div class="card-body login-card-body">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="username" placeholder="Enter your username">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" name="password" placeholder="Enter your password"> {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{request.GET.next}}"> {%endif%}
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <p>
+                Haven't became a member yet?
+            </p>
+            <a class="text-center" href="{% url 'register' %}"> Register</a>
+        </div>
+    </div>
+
+
+{% endblock content%}
