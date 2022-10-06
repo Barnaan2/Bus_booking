@@ -7,6 +7,10 @@ from .forms import OurUserCreationForm,UserForm
 from .models import User
 from system_admin.models import BusBrand
 from bus_admin.models import SubRouteAdmin
+#  if you can help me to avoid this import i really appricate it
+from bus_admin.views import add_booker
+from urllib.parse import urlencode
+from django.urls import reverse
 
 
 # ------------------------------------------------------------------------------------------------------|
@@ -35,7 +39,10 @@ def register(request,role="customer"):
                 login(request, user)
                 return redirect('home')
             elif role == 'booker':
-                return user
+                base_url = reverse('add_booker')
+                user = urlencode({'id':user.id})
+                url = '{}?{}'.format(base_url,user)
+                return redirect(url)
             elif role == "bus_admin":
                 id = request.GET.get('id') 
                 bus_brand = BusBrand.objects.get(id=id)

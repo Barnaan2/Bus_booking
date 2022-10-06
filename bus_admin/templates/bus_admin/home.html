@@ -10,6 +10,9 @@
     {{request.user.username }} <p> is an adminstrator of </p>
     {{bus.name}}
     this is the home page of bus admin
+    <a href="{% url 'manage_bus' %} "> manage bus</a>
+    <a href="{% url 'manage_route' %} "> manage route</a>
+    <a href="{% url 'manage_booker' %} "> manage booker</a>
     <a href="{% url 'logout' %}"> logout</a>
 </body>
 </html>

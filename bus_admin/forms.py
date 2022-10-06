@@ -1,6 +1,11 @@
 from django.forms import ModelForm
-from . models import Bus,Route
+from . models import Bus,Route,SubRouteAdmin
 
+
+class SubrouteAdminForm(ModelForm):
+    class Meta:
+       model = SubRouteAdmin
+       fields = ['admin_at_city','route']
 class BusForm(ModelForm):
     class Meta:
         model = Bus
@@ -24,3 +29,5 @@ class RouteForm(ModelForm):
     class Meta:
         model = Route
         fields = ['first_city','second_city','via_cities','travel_distance','travel_aproximate_time','single_seat_price','travel_facilities']
+
+

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.shortcuts import render
+
 from urllib.parse import urlencode
 from django.urls import reverse
 

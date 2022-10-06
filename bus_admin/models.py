@@ -19,6 +19,7 @@ class Bus(models.Model):
 
 class Route(models.Model): 
 #  the two cities should be foreign  key for city
+    bus_brand = models.ForeignKey(BusBrand, on_delete=models.CASCADE, null=True)
     first_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     second_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True, related_name="second_city")
     via_cities = models.CharField(max_length=255, null=True)
@@ -38,7 +39,7 @@ class Route(models.Model):
 
 class SubRouteAdmin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    admin_at_city = models.CharField(max_length=254, null=True)
+    admin_at_city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     route = models.ForeignKey(Route, on_delete=models.CASCADE, null=True)
     
     def __str__(self):

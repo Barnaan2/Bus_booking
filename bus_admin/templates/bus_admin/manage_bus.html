@@ -13,9 +13,11 @@
     </form>
 {% for bus in buses %} 
 
-{{bus.bus_brand.name}}
-{{bus.plate_number}}
+{{bus.id}}
+{{bus.bus_plate_number}}
 <a href="{% url 'update_bus' bus.id %}">edit</a>
 {% endfor %}
+<a href="{% url 'add_bus' %}">add_bus</a>
+
 </body>
 </html>
