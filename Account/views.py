@@ -13,19 +13,41 @@ from bus_admin.models import SubRouteAdmin
 #                                                                                   
 #   REGISTRATION AND USER MANAGEMENT
 # ------------------------------------------------------------------------------------------------------|
-def register(request):
+def register(request,role="customer"):
     form = OurUserCreationForm()
     # This role should be assigned based on the place the request come  or by some hidden input field
+    if request.user.is_authenticated:
+        if request.user.role == 'customer':
+            return HttpResponse("Error code 000003,you are already registered contact our customer service for help ..")
+        elif request.user.role == 'bus_admin':
+            role = "booker"
+        elif request.user.role == 'booker':
+            return HttpResponse("Error code 000003,you are already registered contact our customer service for help..")
+        elif request.user.role == 'system_admin':
+            role = "bus_admin"
+        # elif request.user.is_superuser:
+        #     role = "system_admin"
     if request.method == 'POST':
         form = OurUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            return redirect('home')
+            if role == 'customer':
+                login(request, user)
+                return redirect('home')
+            elif role == 'booker':
+                return user
+            elif role == "bus_admin":
+                id = request.GET.get('id') 
+                bus_brand = BusBrand.objects.get(id=id)
+                bus_brand.user = user
+                bus_brand.save()
+                return redirect('manage_bus_brand')
+            else:
+                return HttpResponse("Error code 000004,you are already registered contact our customer service for help..")
+      
         else:
-            context = {'form': form}
+            context = {'form': form,"role":role}
             return render(request, 'account/register.html', context)
-    role = "customer"
     context = {"form":form,"role":role}
     return render(request, 'account/register.html', context)
 
@@ -36,13 +58,13 @@ def login_page(request):
     #     return HttpResponseRedirect(reverse('my_redirect'))
     if request.user.is_authenticated:
         if request.user.role == 'customer':
-            return redirect('index')
+            return redirect('home')
         elif request.user.role == 'bus_admin':
             return redirect('bus_admin_home')
         elif request.user.role == 'booker':
             return redirect('subroute_home')
         elif request.user.role == 'system_admin':
-            return redirect('system_admin')
+            return redirect('system_admin_index')
         else:
             return HttpResponse("Erorr code 000001,your account run into a problem. please contact customer survice...")
     if request.method == "POST":
@@ -58,7 +80,7 @@ def login_page(request):
         if user is not None:
             login(request, user)
             if user.role == 'customer':
-                return redirect('index')
+                return redirect('home')
             elif user.role == 'bus_admin':
                 bus_brand = BusBrand.objects.filter(user=user).first()
                 return redirect('bus_admin_home')
@@ -68,7 +90,7 @@ def login_page(request):
                 # context = {'subroutes': subroutes}
                 return redirect('subroute_home')
             elif user.role == 'system_admin':
-                return redirect('system_admin')
+                return redirect('system_admin_index')
             else:
                 return HttpResponse('404 Page Not found')
         else:
@@ -82,7 +104,7 @@ def login_page(request):
 # logout
 def logout_page(request):
     logout(request)
-    return redirect('index')
+    return redirect('home')
 
 
 # ------------------------------------------------------------------------------------------------------|

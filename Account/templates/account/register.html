@@ -16,7 +16,7 @@
 <p>{{message}}</p>
 {% endfor %} {% endif %} <a class="h1" href="{% url 'home' %}">Afroperia Bus Booking</a></div>
 
-
+{{role}}
 
  <div id="phonex" class="alert alert-danger alert-dismissible fade show" style = "display: none">
     <strong>Error!</strong> A problem has been occurred while submitting your data.
@@ -63,7 +63,7 @@
 <div class="input-group-text"></div>
 </div>
 </div>
-<input class="form-control" name="{{form.role.name}}" type="hidden" value="customer" />
+<input class="form-control" name="{{form.role.name}}" type="hidden" value="{{role}}" />
 <div class="row">
 <div class="col-8"></div>
 <!-- /.col -->

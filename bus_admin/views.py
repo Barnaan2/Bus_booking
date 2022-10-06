@@ -8,7 +8,8 @@ from . forms import BusForm,RouteForm
 # manage bus admim
 def index(request):
     # i used this to add the right thing letter when we decide what pass to the index page.
-    context = {"place_holder": "place holder"}
+    bus = BusBrand.objects.filter(user=request.user).first()
+    context = {"bus": bus}
     return render(request,'bus_admin/home.html',context)
 
 def manage_bus(request):
