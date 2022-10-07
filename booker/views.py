@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from account.models import User
 from bus_admin.models import SubRouteAdmin
-from . models import SubRoute 
+from . models import SubRoute
 from . decorators import booker_only
 from . forms import SubRouteForm
 from django.contrib.auth.decorators import login_required
@@ -28,21 +28,22 @@ def home(request):
 #         status=FinishPaymentStatus.objects.create(
 #         fnishpayment=finishpayment,
 #         status=request.POST['status'],
-       
+
 #         )
 #         return redirect ('home', pk=request.user.id)
-   
+
 #     context={'bookings':bookings, 'finishpayment':finishpayment}
-#     # if request.user != finishpayment.booking.hotel.admin: 
+#     # if request.user != finishpayment.booking.hotel.admin:
 #     #        return HttpResponse("You are not allowed here!")
 #     return render(request, 'booker/paid_unpaid.html', context)
 
     # manage subroute
 def manage_subroute(request):
-    subroute = SubRouteAdmin.objects.filter(user=request.user)
+    subroute_admin = SubRouteAdmin.objects.get(user=request.user)
+    subroute = SubRoute.objects.filter(subroute_admin=subroute_admin)
     # q=request.GET.get('q') if request.GET.get('q') != None else ''
     # subroute=SubRoute.objects.filter(id=q)
-    context = {"subroute":subroute}
+    context = {"subroutes":subroute}
     return render(request,'booker/manage_subroute.html',context)
 
 
@@ -63,7 +64,7 @@ def add_subroute(request):
     return render(request,'booker/new.html',context)
 
 def update_subroute(request,id):
-    subroute = SubRoute.objects.filter(id=id)
+    subroute = SubRoute.objects.get(id=id)
     form = SubRouteForm(instance = subroute)
     if request.method == "POST":
         form = SubRouteForm(request.POST,instance=subroute)
@@ -81,9 +82,3 @@ def delete_subroute(request,id):
             return redirect("subroute_home")
       context = {'subroute':subroute}
       return render(request,' ',context)
-
-
-    
-        
-
- 

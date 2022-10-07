@@ -7,12 +7,13 @@
     <title> to manage all the subroute admins</title>
 </head>
 <body>
-  page to manage booker 
+  page to manage booker
     {% for subroute_admin in subroute_admins %}
-    {{ subroute_admin.user.firstname }}
+  <p> {{ subroute_admin.user.username }}  </p>
+  <a href="{% url 'update_booker' subroute_admin.id %}"> edit </a>
     {% endfor%}
     <!-- here we have to call the registration function -->
-    <a href="{% url 'register' %} "> add booker</a>
+  <p><a href="{% url 'register' %} "> add booker</a>  </p>  
 </body>
 
 </html>

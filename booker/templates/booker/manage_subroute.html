@@ -7,6 +7,12 @@
     <title>manage subroute</title>
 </head>
 <body>
+  {% for subroute in subroutes%}
+  {{ subroute.destination }}
+<p>
+<a href="{% url 'update_subroute' subroute.id %}"> update_subroute</a>
+</p>
+  {% endfor %}
     <a href="{% url 'add_subroute' %}">add subroute</a>
 </body>
 </html>
