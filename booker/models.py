@@ -1,5 +1,6 @@
 from django.db import models
 from bus_admin.models import Bus,SubRouteAdmin,Route
+from system_admin.models import City
 # from customer.models import Booking
 # Create your models here.
 
@@ -9,8 +10,8 @@ class SubRoute(models.Model):
     route = models.ForeignKey(Route,on_delete=models.SET_NULL, null=True)
     bus = models.ForeignKey(Bus, on_delete=models.SET_NULL, null=True)
     """ this start should set by the system its equal where the Booker is a subroute admin at"""
-    start = models.CharField(max_length=255, null=True)
-    destination=models.CharField(max_length=255, null=True)
+    start = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
+    destination= models.ForeignKey(City, on_delete=models.CASCADE, null=True, related_name="destination")
     travel_date = models.DateField(null=True)
     travel_begin_time=models.TimeField(null=True)
     updated=models.DateTimeField(auto_now=True)

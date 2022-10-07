@@ -39,9 +39,9 @@ def home(request):
 
     # manage subroute
 def manage_subroute(request):
-    subroute = SubRoute.objects.filter(user=request.user)
-    q=request.GET.get('q') if request.GET.get('q') != None else ''
-    subroute=SubRoute.objects.filter(id=q)
+    subroute = SubRouteAdmin.objects.filter(user=request.user)
+    # q=request.GET.get('q') if request.GET.get('q') != None else ''
+    # subroute=SubRoute.objects.filter(id=q)
     context = {"subroute":subroute}
     return render(request,'booker/manage_subroute.html',context)
 
@@ -54,12 +54,13 @@ def add_subroute(request):
         form = SubRouteForm(request.POST)
         if form.is_valid():
            subroute =  form.save(commit=False)
-           subroute.subroute_admin = SubRouteAdmin.objects.filter(user=request.user).first()
+           subroute.subroute_admin = subroute_admin
            subroute.route = subroute_admin.route
+           subroute.start = subroute_admin.admin_at_city
            subroute.save()
            return redirect("subroute_home")
     context = {'form':form}
-    return redirect(request,'booker/new.html',context)
+    return render(request,'booker/new.html',context)
 
 def update_subroute(request,id):
     subroute = SubRoute.objects.filter(id=id)
@@ -70,7 +71,7 @@ def update_subroute(request,id):
             form.save()
         return redirect("subroute_home")
     context = {'form':form}
-    return redirect(request,'booker/update.html',context)
+    return render(request,'booker/update.html',context)
 
 
 def delete_subroute(request,id):
@@ -79,7 +80,7 @@ def delete_subroute(request,id):
             subroute.delete()
             return redirect("subroute_home")
       context = {'subroute':subroute}
-      return redirect(request,' ',context)
+      return render(request,' ',context)
 
 
     

@@ -106,7 +106,7 @@ def add_city(request):
         form = CityForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('system_admin')
+            return redirect('system_admin_index')
         else:
             messages.error(request, 'there is error in your input try again')
     context = {'form': form}
@@ -124,7 +124,7 @@ def update_city(request, id):
             form.save()
             # success message
             messages.success(request, ' updated successfully')
-            return redirect('system_admin')
+            return redirect('system_admin_index')
     context = {'form': form}
     return render(request, 'system_admin/edit.html', context)
 
@@ -136,7 +136,7 @@ def delete_city(request, id):
     if request.method == "POST":
         city.delete()
         messages.success(request, 'you have deleted the selected item!')
-        return redirect('index')
+        return redirect('system_admin_index')
     context = {'form': city}
     return render(request, '', context)
 

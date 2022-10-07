@@ -7,7 +7,11 @@
     <title>manage city</title>
 </head>
 <body>
-    <p> this is the place to manage city found in the database</p>
-    
+  {% for city in cities %}
+  {{ city.name }}
+  <a href="{% url 'update_city' city.id %}"> edit city </a>
+  {% endfor %}
+  <a href="{% url 'add_city' %}"> add new city </a>
+
 </body>
 </html>

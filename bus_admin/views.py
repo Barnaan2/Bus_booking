@@ -1,9 +1,11 @@
 
+import imp
 from django.shortcuts import render, redirect
 from system_admin.models import BusBrand
 from . models import Bus,Route
 from . forms import BusForm,RouteForm,SubrouteAdminForm
 from . models import SubRouteAdmin
+from account.models import User
 
 # Create your views here.
 # manage bus admim
@@ -114,7 +116,7 @@ def add_booker(request):
         if form.is_valid():
             booker = form.save(commit=False)
             id = request.GET.get('id') 
-            user = user.objects.get(id=id)
+            user = User.objects.get(id=id)
             booker.user = user
             booker.save()
             return redirect('manage_booker')  
