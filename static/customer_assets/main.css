@@ -1,0 +1,291 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+
+
+
+}
+body{
+    margin: 0;
+    padding:0;
+}
+.hero{
+    margin-top: -1rem;
+    padding-top: 5rem;
+background-color: rgb(52, 201, 14);
+}
+
+#header{
+
+    margin: 0.5rem;
+    margin-bottom: 5px;
+}
+
+.hero .logo > img{
+    height: 4rem;
+    width: 5.5rem;
+    object-fit:cover;
+    border-radius: 0.7rem;
+}
+
+
+
+
+#nav{
+    display: flex;
+    align-items: center;
+    /* 0939470108 */
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left:0;
+    right:0;
+  z-index: 1;
+    background-color: rgb(53, 193, 28);
+
+
+
+}
+.hero ul{
+    display: flex;
+    justify-content: space-evenly;
+    list-style: none;
+}
+.hero ul li{
+   padding: 0.5rem;
+    margin: 0.5rem;
+}
+.hero ul li:hover{
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.5rem;
+}
+a{
+    text-decoration:none;
+    color:black
+}
+.navbar-secondary-items{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+.brand-name > h1{
+    font-size: 2rem;
+    font-weight: 759;
+}
+.brand-name > p{
+   font-weight: 200;
+font-family: 'Courier New', Courier, monospace;
+}
+
+.search-box{
+    display: flex;
+    flex-wrap:wrap;
+    /* align-items: center; */
+     justify-content: center;
+    padding-bottom: 2rem;
+
+}
+.search-box input{
+    outline: none;
+    border: none;
+    border-bottom: 1px black solid;
+    margin: 0;
+    font-size: 1rem;
+    border-radius: 2px;
+    padding: 0.6rem;
+
+}
+.search-box input[type="submit"]{
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+    margin: 3px;
+    background-color: rgb(255, 14, 183);
+}
+
+
+
+#main{
+    margin-top: 0;
+    margin: 1rem;
+
+
+
+}
+
+.section-header{
+    padding-top: 2rem;
+    display: flex;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+
+}
+
+.section-header::after{
+    content: "";
+
+    background-color: rgb(0, 98, 255);
+    height: 0.4rem;
+    width: 6rem;
+    position: absolute;
+
+ margin-top: 4rem;
+
+}
+
+#main  .bus-show-case{
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+    gap:1rem 2rem ;
+    align-items: center;
+
+}
+
+.bus-show-case .bus{
+    position: relative;
+  display: grid;
+    align-items: center;
+    justify-content: center;
+  height: 15rem;
+    width: 20rem;
+    box-shadow: 0 0 3px rgb(157, 133, 133) ;
+
+}
+.bus-show-case .bus >img{
+
+   width: 20rem;
+   height: 10rem;
+    object-fit: cover;
+}
+/* 
+.bus-show-case .bus::after{
+ content: "";
+ top: -100%;
+ position: absolute;
+ height: 100%;
+ width: 100%;
+ transition: all 0.3s ease-in-out;
+
+ transform: rotate(90deg);
+
+}
+.bus-show-case .bus:hover::after{
+    top: 0;
+    transform: rotate(0);
+    background-color: rgb(227, 212, 212);
+
+
+} */
+
+.bus-show-case .bus >h2{
+    /* position: absolute;
+
+    transform: translate(50%,-50%) ;
+    right: -100%;
+    top: 50%;
+    display: none;
+    z-index: 1;
+    transition: all 0.5s ease-in-out; */
+
+ display: flex;
+align-items: center;
+justify-content: center;
+text-transform: uppercase;
+
+}
+/* .bus-show-case .bus:hover h2{
+    right: 50%;
+    display: block; */
+
+}
+.bus-show-case .bus >p{
+    display: flex;
+    padding: 3rem;
+}
+
+#main .promote {
+    padding: 5px;
+    display: grid;
+    margin-top: 2rem;
+   background-color: rgb(9, 100, 219);
+   align-items: center;
+   justify-content: center;
+   border-radius: 0.5rem;
+   color: white;
+
+}
+.promote > h3{
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: -.5rem;
+
+}
+.promote ul{
+    list-style: none;
+    font-size: 1rem;
+
+}
+.promote ul li{
+    padding: 0.3rem;
+    font-weight: 600;
+}
+.promote .show-more-box{
+
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    width: 10rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+
+
+}
+.promote .show-more-box:hover{
+    background-color: rgb(165, 159, 174);
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    width: 10rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+
+
+}
+.promote  ul a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+ padding: 1px;
+    font-size: 1.3rem;
+   }
+
+   /*  here there gonna be styles for why and faq section */
+
+   footer{
+    background-color: rgba(33, 18, 87, 0.797);
+    border-top-right-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+  justify-content: space-around;
+ padding: 1rem;
+   }
+   footer .footer_item{
+
+    margin: .5rem;
+    display: flexbox;
+    align-items: center;
+    justify-content: space-around;
+    color: rgb(30, 9, 9);
+   }
+   .footer_item p{
+   font-weight: 400;
+    margin: 1px;
+   }
+
+
+   /* media query */

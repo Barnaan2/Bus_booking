@@ -1,41 +1,51 @@
-<header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<section class="hero">
+    <header id="header">
+        <nav id="nav">
 
-        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
+           <div class="logo">
+               <img src="logo.png" alt="logo">
+           </div>
 
-            <h1>Afroperia</h1>
-        </a>
+           <div class="links">
+               <ul>
+                  <li>
+                    <a href="#"> home </a>
+                       </li>
+                       <li>
+                        <a href="#">  register Bus</a>
+                       </li>
+                       <li>
 
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list">Menu</i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x ">X</i>
-
-        <nav id="navbar " class="navbar ">
-
-
-            <ul>
-                <li><a href="{% url 'home' %} " class="active ">Home</a></li>
-                <li><a href="# ">Contact</a></li>
-                {% if request.user.is_authenticated %}
-                <li><a href="{% url 'my-booking' request.user.id %} ">My Booking</a></li>
-
-                <a href="{% url 'logout' %} ">Logout</a> {%else%}
-
-
-                <li><a class="get-a-quote " href="{% url 'login' %} ">Login/Register</a></li>{%endif%}
-            </ul>
+                      <a href="#"> contact us </a>
+                       </li>
+                     <li>
+                       <a href="#"> login/sign up </a>
+                     </li>
+                     <li>
+                       <a href="#"> help </a>
+                     </li>
+               </ul>
+           </div>
 
         </nav>
+        <div class="navbar-secondary-items">
+<div class="brand-name">
+                <h1>
+                Afroperia Bus Booking
+            </h1>
+            <p>" make your travel fun! let us worry for you "</p>
+        </div>
+            <div class="search-box">
+               <form action="" method="GET">
+           <input type="text" name="x" placeholder="from">
+           <input type="text" name="y" placeholder="to">
+           <input type="date" name="z" placeholder="when">
+           <input type="submit" value="search">
+               </form>
+            </div>
+        </div>
 
-    </div>
-</header>
-<!-- {% if request.user.is_authenticated %}
-<a href="{% url 'my-booking' request.user.id %}">My Booking</a> |
-<a href="{% url 'logout' %}">Logout</a> {%else%}
-<a href="{% url 'login' %}">Login</a> {%endif%}
-<div>
-    <form method="GET" action="{% url 'home' %}">
-        <input type="text" name="q" placeholder="Search for routes, your start, destination or travel date...">
-    </form>
-</div>
 
-<hr> -->
+           </header>
+
+</section>
