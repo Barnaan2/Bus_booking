@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'booking.apps.BookingConfig',
     'account.apps.AccountConfig',
     'payment.apps.PaymentConfig',
-    
-    
-
+    'api.apps.ApiConfig',
+    'rest_framework',
+   'corsheaders',
+ 
 ]
+
 # this the custom user model. 
 AUTH_USER_MODEL = 'account.User'
 
@@ -59,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+      'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Bus_booking.urls'
@@ -154,3 +157,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOW_ALL_ORIGINS = True

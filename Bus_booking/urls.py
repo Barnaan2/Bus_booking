@@ -11,6 +11,6 @@ urlpatterns = [
     path('bus_admin/',include('bus_admin.urls')),
     path('account/',include('account.urls')),
     path('booking/',include('booking.urls')),
-  
+   path('api/',include('api.urls')),
 ]
 
