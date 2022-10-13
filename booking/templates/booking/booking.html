@@ -1,56 +1,74 @@
 {% extends 'customer/customermain.html'%} {% block content%}
-<main id="main">
 
-    <section id="contact" class="contact">
-        <div class="container" data-aos="fade-up">
+<style>
+.selected{
+    background-color: green;
+}
+.booked{
+    background-color: gray;
+}
+</style>
 
-            <div class="col-lg-4 Book card p-2">
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <!-- <div class="price ">
-                        <span>price:</span>
-                        <span>{{subroute.main_route.single_seat_price}}</span>
-                    </div> -->
+<div class="book" style="display:flex ; flex-wrap:wrap; gap:4px; margin-top:100px;">
+    <h2  id="selected"  style="flex-basis:100% ;">Book for your bus</h2> <br>
+    {% for bus_seat in bus_seats %}
+   
+    <div onclick="priceCalculator(id)" id="{{bus_seat.price}}">
 
-                    <div class="dates">
-                        <div>
-                            <label for="travaler_name">Travaler Name: </label>
-                            <input type="text" name="travaler_name" class="form-control" placeholder="Enter your name" required>
+        {% if bus_seat.reserved == True %}
+        <p class="booked"    style="border:2px solid rgb(45, 34, 34) ; width: 70px; text-align: center; flex-basis: 20%;"> {{bus_seat.seat_number}} </p>
+        {% else %}
+    <p class="me"   id="{{bus_seat.id }}" onclick="selector(id)" style="border:2px solid rgb(82, 54, 54) ; width: 70px; text-align: center; flex-basis: 20%; cursor: pointer;"> {{bus_seat.seat_number}} </p>
 
-                        </div>
-                        <div>
-                            <label for="traveler_contact">Travaler Contact: </label>
-                            <input type="tel" id="traveler_contact" name="traveler_contact" placeholder="0-9-0000-0000" pattern="[0]{1}-[9]{1}-[0-9]{4}-[0-9]{4}" required class="form-control">
-                            <small>Format: 0-9-0000-0000</small><br><br>
-                        </div>
-
-                        <div>
-                            <label for="seat_quantity">Number of seat you want to book: </label>
-                            <input type="number" min="1" name="seat_quantity" class="form-control" placeholder="Enter quantity of seat" required>
-                        </div>
-                    </div>
-
-
-
-                    <div class="text-center mt-2"><button type="submit" class="btn btn-primary">Book now</button></div>
-                </form>
-            </div>
-
-
+    {% endif %}
+</div>
+    {%endfor%}
+    <form action="" method="POST">
+        {% csrf_token %}
+               
+        <input id="seat_field" type="text" value="" name="seats"/>
+        <input id="price_field" type="text" value="" name="price"/>
+        <input type="submit" value="Book">
+        
+        
+           </form>
+           <p id="price"> here is price:  </p>
+           
+</div>
 
 
-        </div>
-    </section>
-    <div class="container">
-        <div class="location row">
-            <div class="map col-lg-6">
-                <iframe src=""></iframe>
+<script>
+    let list = []
+    function selector(id){
+   let selected = document.getElementById(id)
+   let newSeat = true
+   list.forEach(checker);
+   function checker(item,index){
+    if(item == id){
+        list.splice(index,1)
+        selected.classList.remove("selected") ;
+        newSeat = false    
+    }
+   }
+   if(newSeat){
+    list.push(id);
+    selected.classList.add("selected") ;
+    
+   }
+   console.log(list);
+   document.getElementById("seat_field").value = list
+    }
 
-            </div>
-        </div>
-    </div>
+    function priceCalculator(price){
+        var total_price = list.length * price
+        document.getElementById("price_field").value = total_price;
+        document.getElementById("price").innerHTML = total_price;
 
-</main>
-<!-- End #main -->
+    }
+    
+   
+    
+</script>
+
 
 {%endblock content%}

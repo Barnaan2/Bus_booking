@@ -20,6 +20,26 @@ class SubRoute(models.Model):
     def __str__(self):
         return str((self.start,self.destination, self.bus.bus_plate_number, self.bus.bus_number)) 
 
+""" this class will be added when the booker adds the subroute. 
+ bus_seat_no = Subrotue.bus.number_of_seat
+ i = 0
+ while(i<bus_seat_no):
+    BusSeat.create(subroute=Subroute,price=subroute.route.price)
+
+
+    i++
+    
+
+"""
+class BusSeat(models.Model):
+    subroute = models.ForeignKey(SubRoute,on_delete=models.CASCADE) 
+    price = models.FloatField() 
+    seat_number = models.IntegerField()
+    reserved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+    def __int__(self):
+        return self.seat_number
 
 # class PaymentInformantion(models.Model):
 #     route = models.ForeignKey(Route, on_delete=models.CASCADE)

@@ -1,0 +1,52 @@
+<main id="main">
+
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+
+            <div class="col-lg-4 Book card p-2">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <!-- <div class="price ">
+                        <span>price:</span>
+                        <span>{{subroute.main_route.single_seat_price}}</span>
+                    </div> -->
+
+                    <div class="dates">
+                        <div>
+                            <label for="travaler_name">Travaler Name: </label>
+                            <input type="text" name="travaler_name" class="form-control" placeholder="Enter your name" required>
+
+                        </div>
+                        <div>
+                            <label for="traveler_contact">Travaler Contact: </label>
+                            <input type="tel" id="traveler_contact" name="traveler_contact" placeholder="0-9-0000-0000" pattern="[0]{1}-[9]{1}-[0-9]{4}-[0-9]{4}" required class="form-control">
+                            <small>Format: 0-9-0000-0000</small><br><br>
+                        </div>
+
+                        <div>
+                            <label for="seat_quantity">Number of seat you want to book: </label>
+                            <input type="number" min="1" name="seat_quantity" class="form-control" placeholder="Enter quantity of seat" required>
+                        </div>
+                    </div>
+
+
+
+                    <div class="text-center mt-2"><button type="submit" class="btn btn-primary">Book now</button></div>
+                </form>
+            </div>
+
+
+
+
+        </div>
+    </section>
+    <div class="container">
+        <div class="location row">
+            <div class="map col-lg-6">
+                <iframe src=""></iframe>
+
+            </div>
+        </div>
+    </div>
+
+</main>

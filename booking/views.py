@@ -1,11 +1,9 @@
-
 from django.shortcuts import render,HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Booking
-from booker.models import SubRoute
+from booker.models import BusSeat, SubRoute
 from bus_admin.models import SubRouteAdmin
 from booker.decorators import booker_only
-# Create your views here.
 from django.contrib.auth.decorators import login_required
 
 
@@ -13,23 +11,48 @@ from django.contrib.auth.decorators import login_required
 
 def booking(request, pk):
     sub_route = get_object_or_404(SubRoute, id=pk)
+    bus_seats = BusSeat.objects.filter(subroute=sub_route)
     if request.method=='POST':
-        Booking.objects.create(
-        user=request.user,
-        sub_route=sub_route,
-        # bus=sub_route.bus,
-        # start=sub_route.start,
-        # destination=sub_route.destination,
-        # travel_date=sub_route.travel_date,
-        # travel_begin_time=sub_route.travel_begin_time,
-        travaler_name=request.POST['travaler_name'],
-        traveler_contact=request.POST['traveler_contact'],
-        seat_quantity=request.POST.get('seat_quantity'),
         
-        )
+        seats = request.POST.get('seats')
+        seat_array = seats.split(',')
+        seat_quantity = len(seat_array)
+        price = request.POST.get('price')
+        booking = Booking.objects.create(
+            user=request.user,
+                total_price=price,
+                seat_quantity= seat_quantity)
+        for seat in seat_array:
+            reserve_seat = BusSeat.objects.get(id=seat)
+            reserve_seat.reserved = True;
+            booking.bus_seat.add(reserve_seat)
+            booking.save()
+            reserve_seat.save()
+            """
+             keed in mind before saving this is wanted to have name of each passanger i can make them fill out form
+            afterward 
+            """
+        return redirect("pay",id=booking.id)
+
+
+        
+
+        # Booking.objects.create(
+        # user=request.user,
+        # sub_route=sub_route,
+        # # bus=sub_route.bus,
+        # # start=sub_route.start,
+        # # destination=sub_route.destination,
+        # # travel_date=sub_route.travel_date,
+        # # travel_begin_time=sub_route.travel_begin_time,
+        # travaler_name=request.POST['travaler_name'],
+        # traveler_contact=request.POST['traveler_contact'],
+        # seat_quantity=request.POST.get('seat_quantity'),)
+        
+        
         return redirect ('my-booking', pk=request.user.id)
 
-    context={}
+    context={"bus_seats" : bus_seats}
     return render(request, 'booking/booking.html', context)
     
 # ------------------------------------------------------------------------------------------------------|
