@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import HttpResponse, render,redirect
 # from booker.decorators import booker_only
 # from bus_admin.decorators import bus_admin_only
 # from system_admin.decorators import only_admins
 # from customer.decorators import only_customer
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
+from booking.views import passengers
 from . models import FinishPayment, PaymentInformation,PaymentMethod
 # from . forms import PaymentMethodForm,PaidForm,PaymentInformationForm
 from booker.models import SubRoute
@@ -118,13 +120,14 @@ def pay(request, id):
         full_name=request.POST.get('full_name'),
         transaction_id = request.POST.get('transaction_id'),
         amount=request.POST.get('amount'))
-
+        return redirect("passenger",pk=id)
+        
     if booking.status != "waiting":
         messages.error(request, 'the this process  cannot accept payment ')
         # return redirect('booking')
     subroute = booking.bus_seat.first().subroute
     payment_information = PaymentInformation.objects.filter(subroute=subroute)
-    context = {'payment_informations': payment_information, 'booking_id':id}
+    context = {'payment_informations': payment_information, 'price':booking.total_price}
     return render(request, 'payment/finish_payment.html', context)
 
 

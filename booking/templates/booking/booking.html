@@ -7,6 +7,9 @@
 .booked{
     background-color: gray;
 }
+.hide{
+    display: none;
+}
 </style>
 
 <div class="book" style="display:flex ; flex-wrap:wrap; gap:4px; margin-top:100px;">
@@ -26,8 +29,8 @@
     <form action="" method="POST">
         {% csrf_token %}
                
-        <input id="seat_field" type="text" value="" name="seats"/>
-        <input id="price_field" type="text" value="" name="price"/>
+        <input class="hide" id="seat_field" type="text" value="" name="seats" required/>
+        <input class="hide" id="price_field" type="text" value="" name="price" required/>
         <input type="submit" value="Book">
         
         

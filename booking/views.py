@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import Booking
+from .models import Booking, Passanger
 from booker.models import BusSeat, SubRoute
 from bus_admin.models import SubRouteAdmin
 from booker.decorators import booker_only
@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def booking(request, pk):
-    sub_route = get_object_or_404(SubRoute, id=pk)
+    sub_route = SubRoute.objects.get(id=pk)
     bus_seats = BusSeat.objects.filter(subroute=sub_route)
     if request.method=='POST':
         
@@ -86,4 +86,20 @@ def manage_booking(request,pk):
         return HttpResponse("Error code 000002; you are not allowed to access this page, please contant customer service ")
     context={'booking_requests':booking_requests}
     return render(request, 'booking/booking_request.html', context)
+
+def passengers(request,pk):
+    booking = Booking.objects.get(id=pk)
+    if request.method=='POST':
+       bus_seat = booking.bus_seat.all()
+       for seat in bus_seat:
+        contact = request.POST.get(str(seat.id)) 
+        name =request.POST.get(str(seat.seat_number)) 
+        Passanger.objects.create(
+            booking = booking,bus_seat=seat,name =name,contact = contact
+        )
+      
+
+    context = {'seats': bus_seat}
+    return render(request,'booking/passenger.html',context)  
+
 

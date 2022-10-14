@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finish Your Payment Before the Expiration</title>
-</head>
-<body>
+{% extends 'customer/customermain.html'%} {% block content%}
+
     <style>
+        body{
+            font-family: sans-serif;
+            margin-top: 150px;
+            margin-bottom: 100px;
+        }
         .container{
             display: flex;
             align-items: center;
@@ -18,7 +16,30 @@
             display: none;
         }
         .chosed{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         /* justify-content: center; */
+            margin-top: 10px;
+        }
+        .chosed input{
+            margin: 10px;
             display: block;
+            font-size: 20px;
+            padding:10px;
+            outline: none;
+            border:none;
+            background-color: rgb(6, 25, 95);
+
+            color: white;
+        }
+        .chosed input[type="submit"]{
+            margin-left: 35%;
+    
+            background-color: rgb(37, 132, 26);
+        }
+        .chosen{
+           background-color: red;
         }
         .payment{
             display: flex;
@@ -36,41 +57,75 @@
             color: white;
             border-radius: 10px;
         }
+        .me{
+            width: 200px;
+            background-color: rgb(13, 107, 21);
+            font-size: 20px;
+            height: 200px;
+            font-weight: 700;
+            text-align: center;
+            color: white;
+            border-radius: 10px;
+
+        }
+        #py{
+            display: none;
+        }
         
     </style>
     <div class="container">
         <div class="payment">
             {% for payment_information in payment_informations %}
-            <div class="pay" onclick="add(id)" id="{{payment_information.id}}">{{ payment_information.payment_method }} 
-            <div id="detail" class="forms">
-               <p>{{payment_information}}</p> 
-            </div>
+            <div class="pay" onclick="add(this)" data-account="{{payment_information}}" data-paymentMethod="{{payment_information.payment_method }}" id="{{payment_information.id}}">
+                {{ payment_information.payment_method }} 
+                {{payment_information}}
+            
         </div>
             {% endfor %}
         </div>
-        
+    </div>
     <div id="form" class="forms">
     <form action="" method="POST">
             {% csrf_token %}
-        
-            <input type="text" required>
-            <input id="py" type="text" name="py_id" required>
-            <input type="hidden" required>
+            {{ price }}
+           <p> choosed <span id="pay_through">select payment Method</span>  </p>
+           <p> Account Number <span id="account">payment method is not selected </span>  </p>
+          
+           <input type="number" min="100"  name="amount"  palceholder="amount" required>
+           <input type="text" name="full_name" placeholder="full name" required>
+           <input type="text" name="transaction_id" placeholder="transaction_id" required>
+            <input id="py" class="forms" type="text" name="py_id" required>
             <input type="submit" value="Finish">
         </form>
     </div>
-    </div>
+    
    
-
-</body>
 <script>
+    let clicked
 
     let add = (id)=>{
-       document.getElementById("form").className = "chosen"
-       document.getElementById("detail").className = "chosen"
-       document.getElementById('py').value = id
-    
+        document.getElementById("form").className += " chosed"
+    // //    document.getElementById("detail").className = "chosen"
+         var Id = id.getAttribute('id')
+         document.getElementById('py').value = Id
+         if(Id!=clicked){
+            document.getElementById(Id).className = "me";
+            if(clicked){
+                document.getElementById(clicked).className ="pay";
+            }
+            
+         }
+         clicked = Id
 
+         
+         console.log(document.getElementById(Id).className)
+    
+    var account = id.getAttribute('data-account');
+    var payment = id.getAttribute('data-paymentMethod')
+   document.getElementById('pay_through').innerHTML = payment
+   document.getElementById('account').innerHTML = account
+       
     }
+   
 </script>
-</html>
+{%endblock content%}
