@@ -89,15 +89,15 @@ def manage_booking(request,pk):
 
 def passengers(request,pk):
     booking = Booking.objects.get(id=pk)
+    bus_seat = booking.bus_seat.all()
     if request.method=='POST':
-       bus_seat = booking.bus_seat.all()
        for seat in bus_seat:
         contact = request.POST.get(str(seat.id)) 
         name =request.POST.get(str(seat.seat_number)) 
         Passanger.objects.create(
             booking = booking,bus_seat=seat,name =name,contact = contact
         )
-      
+        return HttpResponse('everything is done now')
 
     context = {'seats': bus_seat}
     return render(request,'booking/passenger.html',context)  
