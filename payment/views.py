@@ -127,6 +127,7 @@ def pay(request, id):
         # return redirect('booking')
     subroute = booking.bus_seat.first().subroute
     payment_information = PaymentInformation.objects.filter(subroute=subroute)
+    print(payment_information)
     context = {'payment_informations': payment_information, 'price':booking.total_price}
     return render(request, 'payment/finish_payment.html', context)
 

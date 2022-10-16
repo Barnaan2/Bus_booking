@@ -26,7 +26,7 @@
     {% endif %}
 </div>
     {%endfor%}
-    <form action="" method="POST">
+    <form action="" id="bookingForm" method="POST">
         {% csrf_token %}
                
         <input class="hide" id="seat_field" type="text" value="" name="seats" required/>

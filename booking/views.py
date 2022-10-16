@@ -97,7 +97,7 @@ def passengers(request,pk):
         Passanger.objects.create(
             booking = booking,bus_seat=seat,name =name,contact = contact
         )
-        return HttpResponse('everything is done now')
+        return redirect('home')
 
     context = {'seats': bus_seat}
     return render(request,'booking/passenger.html',context)  

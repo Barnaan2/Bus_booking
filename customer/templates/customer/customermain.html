@@ -35,6 +35,9 @@
 </head>
 
 <body>
+    <div id="countDownDiv" style=" font-size: 1rem; position:absolute; top:100px;">
+        countDown happens Here
+    </div>
     {% include 'customer/customernavbar.html' %} {% block content %} {% endblock %} {% include 'customer/customerfooter.html' %}
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
@@ -51,5 +54,6 @@
 
     <!-- Template Main JS File -->
     <script src="{% static 'customer_assets/js/main.js'%}"></script>
+    <script src="{% static 'customer_assets/js/countDown.js' %}"></script>
 
 </body>

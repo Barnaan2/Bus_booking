@@ -85,7 +85,8 @@
         </div>
     </div>
     <div id="form" class="forms">
-    <form action="" method="POST">
+        <button >fuck</button>
+    <form action="" id="a" method="POST">
             {% csrf_token %}
             {{ price }}
            <p> choosed <span id="pay_through">select payment Method</span>  </p>
@@ -96,6 +97,7 @@
            <input type="text" name="transaction_id" placeholder="transaction_id" required>
             <input id="py" class="forms" type="text" name="py_id" required>
             <input type="submit" value="Finish">
+            
         </form>
     </div>
     
