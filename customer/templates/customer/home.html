@@ -1,4 +1,6 @@
- {% extends 'customer/customermain.html'%} {% block content%}
+ {% extends 'customer/customermain.html'%}
+ 
+ {% block content%}
 
 
 
@@ -10,12 +12,16 @@
                 <p data-aos="fade-up" data-aos-delay="100">Go farther in Ethiopia</p>
                 <div>
                     <div class="col-lg-12 text-center">
-                        <small>You can search for your travel start, destination or date here</small>
-                        <form method="GET" action="{% url 'home' %}" class="form-search d-flex align-items-stretch mb-3   justify-content-center " data-aos="fade-up" data-aos-delay="200">
-                            <input type="text" name="q" class="form-control" placeholder="Search route start, destination or date of travel ...">
+                        <small class="try" >You can search for your travel start, destination or date here</small>
+                        <form method="GET"  action="{% url 'home' %}" class=" search-box form-search d-flex align-items-stretch mb-3   justify-content-center " data-aos="fade-up" data-aos-delay="200">
+                            
+                            <input  id="search-box" type="text" name="q" class="form-control" placeholder="Search route start, destination or date of travel ...">
+                           
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
-
+                        <div class="buses">
+                          
+                                             </div>
 
                     </div>
 
@@ -163,9 +169,6 @@
                         </div>
                         <!-- # Faq item-->
 
-
-
-
                     </div>
 
                 </div>
@@ -178,6 +181,10 @@
 </main>
 <!-- End #main -->
 
+<script src="{% static 'customer_assets/js/live.js' %}">
+   
+
+</script>,
 
 
 

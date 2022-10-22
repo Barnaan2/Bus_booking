@@ -1,6 +1,9 @@
+from urllib import response
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.db.models import Q
+from requests import Response
 from account.models import User
 from django.contrib.auth.forms import UserCreationForm 
 from booker.models import SubRoute, Route
@@ -11,6 +14,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def dev(request):
+  routes= {
+    'is this for routes?': 'yes its. now this si just place holder '
+   }  
+  return HttpResponse('hello done ')
 
 def home(request):
     q=request.GET.get('q') 

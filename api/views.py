@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from booker.models import SubRoute
 from system_admin.models import BusBrand
-from . serial import BusBrandSerail
+from . serial import BusBrandSerail, SubRouteSerial
 
 
 @api_view(['GET'])
@@ -32,9 +33,7 @@ def route(request):
 
 @api_view(['GET'])
 def sub_route(request):
-   sub_routes= {
-    'is this for sub-rotues?': 'yes its. now this si just place holder '
-   }
-   
-   return Response(sub_routes)
+   subroute = SubRoute.objects.all()
+   dat = SubRouteSerial(subroute,many=True)
+   return Response(dat.data)
 
