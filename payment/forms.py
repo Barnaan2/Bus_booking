@@ -1,5 +1,6 @@
-# from django.forms import ModelForm
-# from .models import PaymentMethod,Paid,PaymentInformation
+from django.forms import ModelForm
+from .models import PaymentMethod,PaymentInformation
+# Paid,
 
 # class PaymentMethodForm(ModelForm):
 #     class Meta:
@@ -8,10 +9,10 @@
 
 
 
-# class PaymentInformationForm(ModelForm):
-#     class Meta:
-#         model = PaymentInformation
-#         fields = ['payment_method', 'account_holder', 'account_number', 'phone_number']
+class PaymentInformationForm(ModelForm):
+    class Meta:
+        model = PaymentInformation
+        fields = ['payment_method', 'account_holder', 'account_number', 'phone_number']
 
 
 # class PaidForm(ModelForm):

@@ -1,7 +1,7 @@
 from django.db import models
 from account.models import User
 from booking.models import Booking
-from booker.models import SubRoute
+from bus_admin.models import SubRouteAdmin
 
 # Create your models here.
 
@@ -26,8 +26,8 @@ class PaymentMethod(models.Model):
 project is replicating the exising manual model to replace it in computerized manner . so the paymanent is made of a subroute 
 that the account also must be subroute specific to manage easily."""
 class PaymentInformation(models.Model):
-    subroute = models.ForeignKey(SubRoute, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    subroute_admin = models.ForeignKey(SubRouteAdmin, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     # the payment method will be choosed from those method that the system admin added based the agrement .
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     account_holder_name = models.CharField(max_length=100)

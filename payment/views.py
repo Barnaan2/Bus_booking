@@ -1,14 +1,15 @@
 from django.shortcuts import HttpResponse, render,redirect
-# from booker.decorators import booker_only
-# from bus_admin.decorators import bus_admin_only
-# from system_admin.decorators import only_admins
-# from customer.decorators import only_customer
+from booker.decorators import booker_only
+from bus_admin.decorators import bus_admin_only
+from system_admin.decorators import only_admins
+from customer.decorators import only_customer
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from booking.views import passengers
 from . models import FinishPayment, PaymentInformation,PaymentMethod
-# from . forms import PaymentMethodForm,PaidForm,PaymentInformationForm
+from . forms import PaymentInformationForm
+# PaymentMethodForm,PaidForm,
 from booker.models import SubRoute
 from booking.models import Booking
 
@@ -140,22 +141,22 @@ def pay(request, id):
 #     context = {"payment_infos":payment_infos,"subroute_id" : q}
 #     return render(request,"payment/manage_payment_information.html",context)
 
-# @login_required(login_url='login')
-# @booker_only
-# def add_payment_information(request,q):
-#     form = PaymentInformationForm()
-#     if request.method == 'POST':
-#         form = PaymentInformationForm(request.POST)
-#         if form.is_valid():
-#             payment_info = form.save(commit=False)
-#             payment_info.user = request.user
-#             payment_info.subroute =  request.user.sub_route_set.filter(id=q)
-#             payment_info.save()
-#             messages.success(request, 'the operation is done successfully')
-#             return redirect('manage_payment_info',q)
-#         else:
-#             messages.error(request, 'There is an error in your input')
-#             return redirect('manage_payment_info',q)
-#     context = {'form': form}
-#     return render(request, 'payment/add_payment_information.html', context)
+@login_required(login_url='login')
+@booker_only
+def add_payment_information(request,q):
+    form = PaymentInformationForm()
+    if request.method == 'POST':
+        form = PaymentInformationForm(request.POST)
+        if form.is_valid():
+            payment_info = form.save(commit=False)
+            # payment_info.user = request.user
+            payment_info.subroute_admin =  request.user.sub_route_set.filter(id=q).first().subroute_admin
+            payment_info.save()
+            messages.success(request, 'the operation is done successfully')
+            return redirect('manage_payment_info',q)
+        else:
+            messages.error(request, 'There is an error in your input')
+            return redirect('manage_payment_info',q)
+    context = {'form': form}
+    return render(request, 'payment/add_payment_information.html', context)
 
